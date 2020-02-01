@@ -13,6 +13,13 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
+//添加路由，代码部分，下面还有
+const appData = require('../data.json');
+const seller = appData.seller;
+const goods = appData.goods;
+const ratings = appData.ratings;
+//
+
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -42,6 +49,27 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before:function(app) {
+      app.get('/seller', (req, res) => {
+        res.json({
+          // 访问http://localhost:8080/seller就会返回该json内容，上面这个路径可根据需要随便改
+          errno: 0,
+          data: seller
+        })
+      }),
+        app.get('/goods', (req, res) => {
+          res.json({
+            errno: 0,
+            data: goods
+          })
+        }),
+        app.get('/ratings', (req, res) => {
+          res.json({
+            errno: 0,
+            data: ratings
+          })
+        })
     }
   },
   plugins: [
