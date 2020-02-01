@@ -1,12 +1,10 @@
 <template>
 </template>
 
-<script>
-export default {
-  name: 'header'
-}
+<script type="text/ecmascript-6">
+
 </script>
 
-<style scoped>
+<style lang="stylus" rel="stylesheet/stylus">
 
 </style>
