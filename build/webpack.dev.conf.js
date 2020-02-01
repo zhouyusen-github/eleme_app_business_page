@@ -54,7 +54,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       app.get('/seller', (req, res) => {
         res.json({
           // 访问http://localhost:8080/seller就会返回该json内容，上面这个路径可根据需要随便改
-          errno: 0,
+          errno: 0, //错误码，以后根据业务修改
           data: seller
         })
       }),
