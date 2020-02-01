@@ -51,20 +51,20 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     },
     before:function(app) {
-      app.get('/seller', (req, res) => {
+      app.get('/api/seller', (req, res) => {
         res.json({
           // 访问http://localhost:8080/seller就会返回该json内容，上面这个路径可根据需要随便改
           errno: 0, //错误码，以后根据业务修改
           data: seller
         })
       }),
-        app.get('/goods', (req, res) => {
+        app.get('/api/goods', (req, res) => {
           res.json({
             errno: 0,
             data: goods
           })
         }),
-        app.get('/ratings', (req, res) => {
+        app.get('/api/ratings', (req, res) => {
           res.json({
             errno: 0,
             data: ratings
