@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div class="header">
-      i am header
-    </div>
+    <v-header></v-header>
     <div class="tab">
       i am tab
     </div>
@@ -13,9 +11,14 @@
 </template>
 
 <script>
+  import header from './components/header/header.vue';
+  export default {
+    components: {
+      'v-header': header
+    }
+  };
 
 </script>
 
 <style>
-
 </style>
