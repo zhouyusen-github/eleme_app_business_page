@@ -23,4 +23,13 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  #app
+    .tab
+      display: flex
+      width: 100%
+      height: 40px
+      line-height: 40px
+      .tab-item
+        flex: 1
+        text-align: center
 </style>
