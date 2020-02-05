@@ -2,7 +2,9 @@
   <div id="app">
     <v-header></v-header>
     <div class="tab">
-      i am tab
+      <div class="tab-item">商品</div>
+      <div class="tab-item">评论</div>
+      <div class="tab-item">商家</div>
     </div>
     <div class="content">
       i am content
