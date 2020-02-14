@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-header></v-header>
-    <div class="tab">
+    <div class="tab border-1px">
       <div class="tab-item">
         <!-- 使用 router-link 组件来导航. -->
         <!-- 通过传入 `to` 属性指定链接. -->
