@@ -1,0 +1,11 @@
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)  // 以最小dpi为1.5的设备示例
+  .border-1px
+    &::after
+        -webkit-transform : scaleY(0.7)  // 1.5*0.7约等于1，这样来控制缩放
+        transform : scaleY(0.7)
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)  // 以最小dpi为1.5的设备示例
+  .border-1px
+    &::after
+      -webkit-transform : scaleY(0.5)  // 1.5*0.7约等于1，这样来控制缩放
+      transform : scaleY(0.5)
