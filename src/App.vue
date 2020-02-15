@@ -24,9 +24,30 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
   import header from './components/header/header.vue';
+  const ERR_OK = 0; // 代码风格，独立出来修改方便
   export default {
+    data() {
+      return {
+        seller: {}
+      };
+    },
+    // 生命周期函数create
+    created() {
+      // vue-resource
+      this.$http.get('/api/seller').then(response => { // 访问后台api接口返回数据（这里是访问了模拟数据）
+        // get data
+        response = response.body; // 查github上vue-resource介绍的api,接口随版本会变动
+        console.log(response);
+        if (response.errno === ERR_OK) { // 对应build/webpack.dev.conf.js的devServer的before下面json设置的错误码
+          this.seller = response.data; // // 对应build/webpack.dev.conf.js的devServer的before下面json设置的data
+          console.log(this.seller);
+        }
+      }, response => {
+        // error callback
+      });
+    },
     components: {
       'v-header': header
     }
