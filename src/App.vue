@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header><!--:seller="seller"是传递seller到header组件-->
     <div class="tab border-1px">
       <div class="tab-item">
         <!-- 使用 router-link 组件来导航. -->
