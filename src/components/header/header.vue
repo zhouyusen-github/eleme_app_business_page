@@ -23,7 +23,10 @@
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div><!--内容区-->
-    <div class="bulletin-wrapper"></div><!--公告区-->
+    <div class="bulletin-wrapper"><!--公告区bulletin-->
+      <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span><!--两个span写一行也可以消除空白间隙-->
+      <i class="icon-keyboard_arrow_right"></i>
+    </div>
   </div>
 </template>
 
@@ -117,4 +120,31 @@
           margin-left: 2px  //和左边差两像素
           line-height: 24px
           font-size: 10px
+    .bulletin-wrapper
+      position: relative
+      height: 28px //栏高度28像素
+      line-height: 28px
+      padding: 0 22px 0 12px
+      white-space: nowrap  // white-space 属性设置如何处理元素内的空白。nowrap文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。
+      overflow: hidden  // overflow 属性规定当内容溢出元素框时发生的事情。hidden内容会被修剪，并且其余内容是不可见的。
+      text-overflow: ellipsis  // text-overflow属性指定当文本溢出包含它的元素。ellipsis显示省略符号来代表被修剪的文本。
+      background-color: rgba(7, 17, 27, 0.2)  // 设置背景颜色，这样才能看出来公告栏
+      .bulletin-title
+        display: inline-block  // display 属性规定元素应该生成的框的类型。inline-block行内块元素。
+        vertical-align: top  // vertical-align 属性设置元素的垂直对齐方式。top把元素的顶端与行中最高元素的顶端对齐
+        margin-top: 7px  // 把图片压下来一点
+        width: 22px
+        height: 12px
+        bg-image('bulletin')  // 引入图片，bg-image是之前写好的函数
+        background-size: 22px 12px  // background-size调整图片到指定大小，上面的width和height是显示位置的大小
+        background-repeat: no-repeat  // background-repeat 属性设置是否及如何重复背景图像。
+      .bulletin-text
+        vertical-align: top
+        margin: 0 4px
+        font-size: 10px
+      .icon-keyboard_arrow_right
+        position: absolute
+        font-size: 10px
+        right: 12px
+        top: 8px
 </style>
