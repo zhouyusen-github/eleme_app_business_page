@@ -103,7 +103,7 @@
       .support-count
         position: absolute
         right: 12px  // 距离右绝对边界12px
-        bottom: 18px  // 距离底绝对边界18px
+        bottom: 14px  // 距离底绝对边界14px
         padding: 0 8px
         height: 24px
         line-height: 24px
@@ -111,7 +111,10 @@
         background-color: rgba(0, 0, 0, 0.2)
         text-align: center
         .count
+          vertical-align: top  //顶部对齐
           font-size: 10px
         .icon-keyboard_arrow_right  //来自icon.styl
+          margin-left: 2px  //和左边差两像素
+          line-height: 24px
           font-size: 10px
 </style>
