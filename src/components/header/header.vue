@@ -18,6 +18,10 @@
           <span class = "text">{{seller.supports[0].description}}</span>
         </div>
       </div><!--标题-->
+      <div v-if="seller.supports" class="support-count"><!--右下角的“5个”即商标支持-->
+        <span class="count">{{seller.supports.length}}个</span>
+        <i class="icon-keyboard_arrow_right"></i>
+      </div>
     </div><!--内容区-->
     <div class="bulletin-wrapper"></div><!--公告区-->
   </div>
@@ -42,8 +46,9 @@
   // 用'.'的层级机制,正好和div的层级相一致
   .header
     color: #fff
-    background: #000
+    background: #999
     .content-wrapper
+      position: relative
       padding: 24px 12px 18px 24px  // content区设计稿除2
       font-size: 0  // 字体大小，虽然这里只有一张图片，但是不设字体大小为0的话，会多占一些空间
       .avatar
@@ -95,5 +100,18 @@
           .text
             line-height: 12px
             font-size: 12px
-
+      .support-count
+        position: absolute
+        right: 12px  // 距离右绝对边界12px
+        bottom: 18px  // 距离底绝对边界18px
+        padding: 0 8px
+        height: 24px
+        line-height: 24px
+        border-radius: 14px  // 14像素的圆角
+        background-color: rgba(0, 0, 0, 0.2)
+        text-align: center
+        .count
+          font-size: 10px
+        .icon-keyboard_arrow_right  //来自icon.styl
+          font-size: 10px
 </style>
