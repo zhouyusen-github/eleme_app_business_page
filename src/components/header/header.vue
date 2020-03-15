@@ -27,6 +27,9 @@
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span><!--两个span写一行也可以消除空白间隙-->
       <i class="icon-keyboard_arrow_right"></i>
     </div>
+    <div class="background">
+      <img :src="seller.avatar" width="100%" height="100%">
+    </div>
   </div>
 </template>
 
@@ -48,8 +51,9 @@
   // 参照设计师稿子来写样式
   // 用'.'的层级机制,正好和div的层级相一致
   .header
+    position: relative
     color: #fff
-    background: #999
+    background: rgba(7, 17, 27, 0.5)  // 半透明看到底部的图片
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px  // content区设计稿除2
@@ -142,9 +146,18 @@
         vertical-align: top
         margin: 0 4px
         font-size: 10px
-      .icon-keyboard_arrow_right
+      .icon-keyboard_arrow_right  // 引入的小图标
         position: absolute
         font-size: 10px
         right: 12px
         top: 8px
+    .background  // 位置上完全占据整个背景
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      z-index: -1  // z-index 属性指定一个元素的堆叠顺序。
+      filter: blur(10px)  // filter滤镜
+
 </style>
