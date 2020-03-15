@@ -30,11 +30,13 @@
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
-    <div v-show="detailShow" class="detail">
+    <div v-show="detailShow" class="detail"><!--弹层页,v-show来控制是否显示-->
       <div class="detail-wrapper clearfix">
-        <div class="detail-main"></div>
+        <div class="detail-main">
+          <h1 class="name">{{seller.name}}</h1>
+        </div>
       </div>
-      <div class="detail-close">
+      <div class="detail-close"><!--弹层页的叉叉按钮-->
         <i class="icon-close"></i>
       </div>
     </div>
@@ -172,7 +174,7 @@
       height: 100%
       z-index: -1  // z-index 属性指定一个元素的堆叠顺序。
       filter: blur(10px)  // filter滤镜
-    .detail
+    .detail  // css Sticky footer实现
       position: fixed
       z-index: 100
       top: 0
@@ -182,10 +184,16 @@
       overflow: auto
       background: rgba(7, 17, 27, 0.8)
       .detail-wrapper
-        min-height: 100%
+        min-height: 100%  // 最小也占100%，如果内容多还可以增大
+        width: 100%
         .detail-main
           margin-top: 64px
-          padding-bottom: 64px
+          padding-bottom: 64px  // 留出空间避免盖掉后面的叉叉
+          .name
+            line-height: 16px
+            text-align: center  // text-align属性指定元素文本的水平对齐方式。
+            font-size: 16px
+            font-weight: 700
       .detail-close
         position: relative
         width: 32px
