@@ -4,6 +4,16 @@ body.html
   font-weight: 200
   font-family: 'PingFang SC', 'STHeitiSC-Light','Helvetica-Light',arial,sans-serif
 
+.clearfix  // 在 CSS 中,类选择器以一个点号显示
+  display: inline-block
+  &:after  // css伪类 :after 选择器在被选元素的内容后面插入内容。用 content 属性来指定要插入的内容。
+    display: block
+    content: "."
+    height: 0  // height属性设置元素的高度
+    line-height: 0  // 行间距
+    clear: both  // 在左右两侧均不允许浮动元素。
+    visibility: hidden  // visibility:hidden可以隐藏某个元素 但隐藏的元素仍需占用与未隐藏之前一样的空间
+
 // 1像素线条缩放
 @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)  // 以最小dpi为1.5的设备示例
   .border-1px
