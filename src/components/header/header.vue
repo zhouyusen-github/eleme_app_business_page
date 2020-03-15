@@ -34,6 +34,7 @@
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
+          <star :size="48" :score="seller.score"></star><!--:size="48" :score="seller.score"对应star.vue的export default中的两个需要传入的参数-->
         </div>
       </div>
       <div class="detail-close"><!--弹层页的叉叉按钮-->
@@ -44,6 +45,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import star from '../star/star'; // 对应star.vue的export default
   export default {
     props: {
       seller: {
@@ -57,6 +59,9 @@
     },
     created() {
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']; // 对应接口返回数据的5种情况，这里写好上面html代码就可以选择用
+    },
+    components: {
+      star
     }
   };
 </script>
