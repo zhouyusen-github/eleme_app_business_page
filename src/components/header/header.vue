@@ -30,6 +30,14 @@
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrapper clearfix">
+        <div class="detail-main"></div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close"></i>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,6 +47,11 @@
       seller: {
         type: Object
       }
+    },
+    data() {
+      return {
+        detailShow: true
+      };
     },
     created() {
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']; // 对应接口返回数据的5种情况，这里写好上面html代码就可以选择用
@@ -159,5 +172,25 @@
       height: 100%
       z-index: -1  // z-index 属性指定一个元素的堆叠顺序。
       filter: blur(10px)  // filter滤镜
-
+    .detail
+      position: fixed
+      z-index: 100
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      overflow: auto
+      background: rgba(7, 17, 27, 0.8)
+      .detail-wrapper
+        min-height: 100%
+        .detail-main
+          margin-top: 64px
+          padding-bottom: 64px
+      .detail-close
+        position: relative
+        width: 32px
+        height: 32px
+        margin: -64px auto 0 auto // detail-wrapper和detail-close是平级的，而且detail-wrapper已经占据100%，所以detail-close的margin需要负数来往上移才能出现
+        clear: both
+        font-size: 32px
 </style>
