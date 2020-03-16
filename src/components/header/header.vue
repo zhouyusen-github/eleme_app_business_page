@@ -37,6 +37,11 @@
           <div class="star-wrapper">
             <star :size="48" :score="seller.score"></star><!--:size="48" :score="seller.score"对应star.vue的export default中的两个需要传入的参数-->
           </div>
+          <div class="title"><!--小标题-->
+            <div class="line"></div>
+            <div class="text">优惠信息</div>
+            <div class="line"></div>
+          </div>
         </div>
       </div>
       <div class="detail-close"><!--弹层页的叉叉按钮-->
@@ -205,6 +210,21 @@
             margin-top: 18px // 外边距
             padding: 2px 0 // 内边距
             text-align: center
+          .title
+            display: flex // 使用flex布局，由于用了postcss，兼容性代码就不用写了
+            width: 80%
+            margin: 30px auto 24px auto
+            .line
+              flex: 1 // 让所有弹性盒模型对象的子元素都有相同的长度，且忽略它们内部的内容。（必须是弹性盒模型对象的子元素）
+              position: relative
+              top: -6px // top 属性规定元素的顶部边缘。该属性定义了一个定位元素的上外边距边界与其包含块上边界之间的偏移。本质上我是需要一条居中的横线，而不是边框，所以用负数上移
+              border-bottom: 1px solid rgba(255, 255, 255, 0.2) // 设置一个声明中所有底部边框属性。
+            .text
+              padding: 0 12px
+              font-size: 14px
+
+
+
       .detail-close
         position: relative
         width: 32px
