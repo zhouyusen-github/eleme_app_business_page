@@ -42,6 +42,12 @@
             <div class="text">优惠信息</div>
             <div class="line"></div>
           </div>
+          <ul v-if="seller.supports" class="supports"><!--商家支持，而且不一定有，所以v-if-->
+            <li class="support-item" v-for="item in seller.supports"><!--商家支持有多个-->
+              <span class="item" :class="classMap[seller.supports[$index].type]"></span>
+              <span class="text">{{seller.supports[$index].description}}</span>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="detail-close"><!--弹层页的叉叉按钮-->
@@ -222,7 +228,7 @@
             .text
               padding: 0 12px
               font-size: 14px
-
+            .supports
 
 
       .detail-close
