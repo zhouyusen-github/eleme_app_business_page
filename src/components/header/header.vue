@@ -53,6 +53,9 @@
             <div class="text">商家公告</div>
             <div class="line"></div>
           </div>
+          <div class="bulletin">
+            <p class="content">{{seller.bulletin}}</p>
+          </div>
         </div>
       </div>
       <div class="detail-close"><!--弹层页的叉叉按钮-->
@@ -263,6 +266,13 @@
               .text
                 line-height: 12px
                 font-size: 12px
+          .bulletin
+            width: 80%
+            margin: 0 auto
+            .content
+              padding: 0 12px
+              line-height: 24px
+              font-size: 12px
       .detail-close
         position: relative
         width: 32px
