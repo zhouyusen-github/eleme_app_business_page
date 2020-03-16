@@ -44,8 +44,8 @@
           </div>
           <ul v-if="seller.supports" class="supports"><!--商家支持，而且不一定有，所以v-if-->
             <li class="support-item" v-for="item in seller.supports"><!--商家支持有多个-->
-              <span class="item" :class="classMap[seller.supports[$index].type]"></span>
-              <span class="text">{{seller.supports[$index].description}}</span>
+              <span class="icon" :class="classMap[item.type]"></span>
+              <span class="text">{{item.description}}</span>
             </li>
           </ul>
         </div>
@@ -218,7 +218,7 @@
             text-align: center
           .title
             display: flex // 使用flex布局，由于用了postcss，兼容性代码就不用写了
-            width: 80%
+            width: 80% // 适应不同大小手机屏幕
             margin: 30px auto 24px auto
             .line
               flex: 1 // 让所有弹性盒模型对象的子元素都有相同的长度，且忽略它们内部的内容。（必须是弹性盒模型对象的子元素）
@@ -228,9 +228,36 @@
             .text
               padding: 0 12px
               font-size: 14px
-            .supports
-
-
+          .supports
+            width: 80%
+            margin: 0 auto // 水平居中
+            .support-item
+              padding: 0 12px
+              margin-bottom: 12px
+              font-size: 0
+              &:last-child // 最后一个支持项目的下外边距宽度为0
+                margin-bottom: 0
+              .icon
+                display: inline-block
+                width: 16px
+                height: 16px
+                vertical-align: top
+                margin-right: 6px
+                background-size: 16px 16px
+                background-repeat: no-repeat
+                &.decrease
+                  bg-image('decrease_2')
+                &.discount
+                  bg-image('discount_2')
+                &.guarantee
+                  bg-image('guarantee_2')
+                &.invoice
+                  bg-image('invoice_2')
+                &.special
+                  bg-image('special_2')
+              .text
+                line-height: 12px
+                font-size: 12px
       .detail-close
         position: relative
         width: 32px
