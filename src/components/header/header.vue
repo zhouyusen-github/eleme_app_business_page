@@ -34,7 +34,9 @@
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
-          <star :size="48" :score="seller.score"></star><!--:size="48" :score="seller.score"对应star.vue的export default中的两个需要传入的参数-->
+          <div class="star-wrapper">
+            <star :size="48" :score="seller.score"></star><!--:size="48" :score="seller.score"对应star.vue的export default中的两个需要传入的参数-->
+          </div>
         </div>
       </div>
       <div class="detail-close"><!--弹层页的叉叉按钮-->
@@ -199,6 +201,10 @@
             text-align: center  // text-align属性指定元素文本的水平对齐方式。
             font-size: 16px
             font-weight: 700
+          .star-wrapper
+            margin-top: 18px // 外边距
+            padding: 2px 0 // 内边距
+            text-align: center
       .detail-close
         position: relative
         width: 32px
