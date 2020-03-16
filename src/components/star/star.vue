@@ -1,7 +1,9 @@
 <!--由于评论星星用到的地方很多所以单独作为一个组件写出来-->
 <template>
   <div class="star" v-bind:class="starType"><!--由于使用时星星大小和位置的样式都不一样，所以用:class="starType"，这样可以动态地切换 class-->
-    <span v-for="itemClass in itemClasses" v-bind:class="itemClass" class="star-item"></span><!--v-for是for循环个该组件，这比用原生js方便灵活很多-->
+    <span v-for="itemClass in itemClasses" v-bind:class="itemClass" class="star-item" track-by="$index"></span>
+    <!--v-for是for循环个该组件，这比用原生js方便灵活很多-->
+    <!--track-by="$index",通过trace-by给数组设定唯一标识。使Vue.js在渲染过程中会尽量复用原有的对象的作用域及DOM元素。不写不会出问题-->
   </div>
 </template>
 
@@ -50,7 +52,7 @@
     .star-item
       display: inline-block  // 星星横向排列
       background-repeat: no-repeat
-    &.star-48  // &.这种格式我不太懂，也查不到，你可以查一下生成网页后的html代码
+    &.star-48  // &.这种格式我不太懂，也查不到，生成网页后的html代码中是class = "star star-48"
       .star-item
         width: 20px
         height: 20px
