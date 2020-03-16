@@ -48,6 +48,11 @@
               <span class="text">{{item.description}}</span>
             </li>
           </ul>
+          <div class="title"><!--和上面优惠信息一样-->
+            <div class="line"></div>
+            <div class="text">商家公告</div>
+            <div class="line"></div>
+          </div>
         </div>
       </div>
       <div class="detail-close"><!--弹层页的叉叉按钮-->
