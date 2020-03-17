@@ -98,7 +98,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '../common/stylus/mixin';// 不能用common缩写，那是引入库才能用的
+  @import '../common/stylus/mixin';// 不能用common缩写，那是引入库才能用的 //bg-image()的函数是在里面实现的
   // 参照设计师稿子来写样式
   // 用'.'的层级机制,正好和div的层级相一致
   .header

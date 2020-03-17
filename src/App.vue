@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-header :seller="seller"></v-header><!--:seller="seller"是传递seller到header组件-->
+    <v-header :seller="seller"></v-header><!--:seller="seller"是传递seller到header组件--><!--seller是访问seller接口返回的数据-->
     <div class="tab border-1px">
       <div class="tab-item">
         <!-- 使用 router-link 组件来导航. -->
@@ -28,7 +28,7 @@
   import header from './components/header/header.vue';
   const ERR_OK = 0; // 代码风格，独立出来修改方便
   export default {
-    data() {
+    data() { //
       return {
         seller: {}
       };
