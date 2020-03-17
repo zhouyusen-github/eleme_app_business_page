@@ -1,7 +1,7 @@
 <template>
   <div class="goods">
     <div class="menu-wrapper"><!--左侧--><!--是一个列表-->
-      <ul>
+      <ul><!--因为是列表，所以用ul-->
         <li v-for="item in goods" class="menu-item">
           <span class="text border-1px"><!--分类名:精选热菜，精选凉菜--><!--border-1px是在base.styl实现的-->
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span><!--同之前的小图标-->
@@ -10,7 +10,32 @@
         </li>
       </ul>
     </div>
-    <div class="foods-wrapper"></div><!--右侧-->
+    <div class="foods-wrapper"><!--右侧-->
+      <ul>
+        <li v-for="item in goods" class="food-list"><!--各个分类名先一个循环-->
+          <h1 class="title">{{item.name}}</h1>
+          <ul>
+            <li v-for="food in item.foods" class="food-item"><!--各个分类名下有多个食品-->
+              <div class="icon"><!--食品图标-->
+                <img :src="food.icon">
+              </div>
+              <div class="content"><!--食品介绍-->
+                <h2 class="name">{{food.name}}</h2>
+                <p class="description">{{food.description}}</p>
+                <div class="extra">
+                  <span>月售{{food.sellCount}}份</span>
+                  <span>好评率{{food.rating}}%</span>
+                </div>
+                <div class="price">
+                  <span>￥{{food.price}}</span>
+                  <span v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
