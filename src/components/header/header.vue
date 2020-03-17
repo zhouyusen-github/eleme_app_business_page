@@ -220,6 +220,7 @@
       overflow: auto
       background: rgba(7, 17, 27, 0.8)
       transition: all 3.5s // 过渡效果
+      backdrop-filter: blur(10px)  // 背景毛玻璃效果
       &.fade-enter, &.fade-leave-to // 出现时的第一帧，消失时的最后一帧，应用的样式
         opacity: 0 // 透明度设置为0
         // background: rgba(7, 27, 7, 0.8) 修改颜色也是可以的
