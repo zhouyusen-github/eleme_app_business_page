@@ -30,6 +30,7 @@
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
+    <transition name="fade"><!--需要跳转动画的，用transition框起来即可，则是vue2.x的做法-->
     <div v-show="detailShow" class="detail"><!--弹层页,v-show来控制是否显示-->
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
@@ -62,6 +63,7 @@
         <i class="icon-close"></i>
       </div>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -217,6 +219,10 @@
       height: 100%
       overflow: auto
       background: rgba(7, 17, 27, 0.8)
+      transition: all 3.5s // 过渡效果
+      &.fade-enter, &.fade-leave-to // 出现时的第一帧，消失时的最后一帧，应用的样式
+        opacity: 0 // 透明度设置为0
+        // background: rgba(7, 27, 7, 0.8) 修改颜色也是可以的
       .detail-wrapper
         min-height: 100%  // 最小也占100%，如果内容多还可以增大
         width: 100%
