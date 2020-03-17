@@ -18,7 +18,7 @@
           <span class = "text">{{seller.supports[0].description}}</span>
         </div>
       </div><!--标题-->
-      <div v-if="seller.supports" class="support-count"><!--右下角的“5个”即商标支持-->
+      <div v-if="seller.supports" class="support-count" @click="showDetail"><!--右下角的“5个”即商标支持-->
         <span class="count">{{seller.supports.length}}个</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="detail-close"><!--弹层页的叉叉按钮-->
+      <div class="detail-close" @click="hideDetail"><!--弹层页的叉叉按钮--><!--@click是v-on:click缩写，点击事件-->
         <i class="icon-close"></i>
       </div>
     </div>
@@ -75,8 +75,16 @@
     },
     data() {
       return {
-        detailShow: true
+        detailShow: false
       };
+    },
+    methods: {
+      showDetail() {
+        this.detailShow = true;
+      },
+      hideDetail() {
+        this.detailShow = false;
+      }
     },
     created() {
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']; // 对应接口返回数据的5种情况，这里写好上面html代码就可以选择用
