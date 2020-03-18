@@ -15,9 +15,9 @@
         <li v-for="item in goods" class="food-list"><!--各个分类名先一个循环-->
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item"><!--各个分类名下有多个食品-->
+            <li v-for="food in item.foods" class="food-item border-1px"><!--各个分类名下有多个食品-->
               <div class="icon"><!--食品图标-->
-                <img :src="food.icon">
+                <img width="57" height="57" :src="food.icon">
               </div>
               <div class="content"><!--食品介绍-->
                 <h2 class="name">{{food.name}}</h2>
@@ -114,7 +114,6 @@
               bg-image('invoice_3')
             &.special
               bg-image('special_3')
-
     .foods-wrapper
       flex: 1
 </style>
