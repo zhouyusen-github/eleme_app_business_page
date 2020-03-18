@@ -1,6 +1,6 @@
 <template>
   <div class="goods">
-    <div class="menu-wrapper"><!--左侧--><!--是一个列表-->
+    <div class="menu-wrapper" ref="menuWrapper"><!--左侧--><!--是一个列表-->
       <ul><!--因为是列表，所以用ul-->
         <li v-for="item in goods" class="menu-item">
           <span class="text border-1px"><!--分类名:精选热菜，精选凉菜--><!--border-1px是在base.styl实现的-->
@@ -10,7 +10,7 @@
         </li>
       </ul>
     </div>
-    <div class="foods-wrapper"><!--右侧-->
+    <div class="foods-wrapper" ref="foodWrapper"><!--右侧-->
       <ul>
         <li v-for="item in goods" class="food-list"><!--各个分类名先一个循环-->
           <h1 class="title">{{item.name}}</h1>
@@ -40,6 +40,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import BScroll from 'better-scroll'; // 引入npm安装的better-scroll组件
   const ERR_OK = 0;
   export default {
     props: { // 接收外部传入seller数据（这里是App.vue）
@@ -60,11 +61,18 @@
         if (response.errno === ERR_OK) {
           this.goods = response.data;
           console.log(this.goods);
+          this._initScroll();
         }
       }, response => {
         // error callback
       });
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']; // 对应接口返回数据的5种情况，这里写好上面html代码就可以选择用
+    },
+    methods: {
+      _initScroll() {
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {}); // 接收两个参数 1.一个dom对象 2.一个json对象（option）
+        this.foodScroll = new BScroll(this.$refs.foodWrapper, {});
+      }
     }
   };
 </script>
