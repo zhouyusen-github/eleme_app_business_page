@@ -23,12 +23,12 @@
                 <h2 class="name">{{food.name}}</h2>
                 <p class="description">{{food.description}}</p>
                 <div class="extra">
-                  <span>月售{{food.sellCount}}份</span>
+                  <span class="count">月售{{food.sellCount}}份</span>
                   <span>好评率{{food.rating}}%</span>
                 </div>
                 <div class="price">
-                  <span>￥{{food.price}}</span>
-                  <span v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
+                  <span class="now_price">￥{{food.price}}</span>
+                  <span class="old_price" v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
                 </div>
               </div>
             </li>
@@ -115,5 +115,53 @@
             &.special
               bg-image('special_3')
     .foods-wrapper
-      flex: 1
+      flex: 1 // 右边的位置就全给了
+      .title // 看设计图'外卖01'的特色粥品，参数在那里(记得除2)
+        padding-left: 14px
+        height: 26px
+        line-height: 26px
+        border-left: 2px solid #d9dde1
+        font-size: 12px
+        color:rgb(147, 153, 159)
+        background: #f3f5f7
+      .food-item // 左边图片空间是固定的,右边内容是自由的,适合用flex
+        display: flex
+        margin: 18px
+        padding-bottom: 18px // border是在margin和padding的边界上的
+        border-1px(rgba(7, 17, 27, 0.1))
+        &:last-child // 最后一个
+          border-none() // 最后一个要关闭1像素border
+          padding-bottom: 0 // 设计图上最后一个食品距离下一个大标题只有18px，那么需要关闭padding，否则就36px了
+        .icon // 左边图片宽度是固定的
+          flex: 0 0 57px
+          margin-right: 10px
+        .content // 右侧自适应
+          flex: 1
+          .name
+            margin: 2px 0 8px 0
+            height: 14px
+            line-height: 14px
+            font-size: 14px
+            color:rgb(7, 17, 27)
+          .description, .extra // 公有属性可以写在一起减少代码量
+            line-height: 10px
+            font-size: 10px
+            color: rgb(147, 153, 159) // 灰色
+          .description // 有区别的再分开写
+            margin-bottom: 8px
+          .extra
+            &.count
+              margin-right: 12px // 月售和好评率之间有12像素间隔
+          .price
+            font-weight: 700
+            line-height: 24px
+            .now_price
+              margin-right: 8px
+              font-size: 14px
+              color:rgb(240, 20, 20)
+            .old_price
+              text-decoration: line-through // 横线
+              font-size: 10px
+              color: rgb(147, 153, 159)
+
 </style>
