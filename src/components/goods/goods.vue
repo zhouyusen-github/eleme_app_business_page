@@ -12,7 +12,7 @@
     </div>
     <div class="foods-wrapper" ref="foodWrapper"><!--右侧-->
       <ul>
-        <li v-for="item in goods" class="food-list"><!--各个分类名先一个循环-->
+        <li v-for="item in goods" class="food-list food-list-hook"><!--各个分类名先一个循环--><!--末尾加hook是一个编程习惯，表明这只是为了被js选择，没有实际的效果-->
           <h1 class="title">{{item.name}}</h1>
           <ul>
             <li v-for="food in item.foods" class="food-item border-1px"><!--各个分类名下有多个食品-->
@@ -50,7 +50,8 @@
     },
     data() { // 定义属性 ( 返回一个对象),和header.vue,App.vue相同格式
       return {
-        goods: []
+        goods: [],
+        listHeight: [] // 记录每个右侧区间的高度
       };
     },
     created() { // 访问goods数据接口获取goods数据（同App.vue中访问seller接口获取数据的格式，不在App.vue就获取该数据的原因是，需要数据时再访问相关接口）
@@ -70,8 +71,18 @@
     },
     methods: {
       _initScroll() {
-        this.menuScroll = new BScroll(this.$refs.menuWrapper, {}); // 接收两个参数 1.一个dom对象 2.一个json对象（option）
-        this.foodScroll = new BScroll(this.$refs.foodWrapper, {});
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {}); // 接收两个参数 1.一个dom对象 2.一个json对象（option）,这个组件应该是给这段dom添加了样式什么的
+        this.foodScroll = new BScroll(this.$refs.foodWrapper, {}); // this.$refs.menuWrapper对应html中的ref="menuWrapper"
+      },
+      _calculateHeight() { // 各食品大类区块高度的数组
+        let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook'); // 各食品大类区块的数组
+        let height = 0;
+        this.listHeight.push(height);
+        for (let i = 0; i < foodList.length; i++) {
+          let item = foodList[i];
+          height += item.clientHeight; // Element.clientHeight是Web API接口获取css信息是元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。
+          this.listHeight.push(height);
+        }
       }
     }
   };
@@ -156,6 +167,7 @@
             font-size: 10px
             color: rgb(147, 153, 159) // 灰色
           .description // 有区别的再分开写
+            line-height: 12px
             margin-bottom: 8px
           .extra
             &.count
