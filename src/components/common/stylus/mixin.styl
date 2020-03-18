@@ -1,3 +1,7 @@
+/*
+引入了这个文件，下面这些就可以像函数一样被使用
+*/
+
 //这里是负责1像素边框问题
 border-1px($color) //stylus的mixins语法支持传入变量
   position: relative //创建相对定位布局,为after和before的border的绝对布局做定位
@@ -9,6 +13,11 @@ border-1px($color) //stylus的mixins语法支持传入变量
     width: 100% //需要横向撑开边框宽度
     border-top: 1px solid $color //因为是在元素之后插入,所以是用上边框
     content: ' ' //after或者before使用的时候,不传入东西也要填一个空字符串
+
+//关闭一像素
+border-none()
+  &:after
+    display: none // 意思此元素不会被显示。而后写的css优先，所以两个函数放一起，前面的1像素边框就不会显示了
 
 
 //header商店图标的自适应调整
