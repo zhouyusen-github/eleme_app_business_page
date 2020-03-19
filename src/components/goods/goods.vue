@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper"><!--左侧--><!--是一个列表-->
       <ul><!--因为是列表，所以用ul-->
-        <li v-for="(item, index) in goods" class="menu-item" :key="item.id" :class="{'current':currentIndex === index}"><!--当currentIndex===$index执行current样式-->
+        <li v-for="(item, index) in goods" class="menu-item border-1px" :key="index" :class="{'current':index === currentIndex}"><!--当currentIndex===$index执行current样式-->
           <span class="text border-1px"><!--分类名:精选热菜，精选凉菜--><!--border-1px是在base.styl实现的-->
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"/><!--同之前的小图标-->
             {{item.name}}
@@ -12,7 +12,7 @@
     </div>
     <div class="foods-wrapper" ref="foodWrapper"><!--右侧-->
       <ul>
-        <li v-for="item in goods" class="food-list food-list-hook"><!--各个分类名先一个循环--><!--末尾加hook是一个编程习惯，表明这只是为了被js选择，没有实际的效果-->
+        <li v-for="item in goods" class="food-list"><!--各个分类名先一个循环--><!--末尾加hook是一个编程习惯，表明这只是为了被js选择，没有实际的效果-->
           <h1 class="title">{{item.name}}</h1>
           <ul>
             <li v-for="food in item.foods" class="food-item border-1px"><!--各个分类名下有多个食品-->
@@ -43,7 +43,7 @@
   import BScroll from 'better-scroll'; // 引入npm安装的better-scroll组件
   const ERR_OK = 0;
   export default {
-    props: { // 接收外部传入seller数据(这里是App.vue）
+    props: { // 接收外部传入seller数据(这里是App.vue)
       seller: {
         type: Object
       }
@@ -52,25 +52,27 @@
       return {
         goods: [],
         listHeight: [], // 记录每个右侧区间的高度
-        scrollY: 0 // 实时拿到右侧Y值，和左侧索引映射
+        scrollY: 5 // 实时拿到右侧Y值，和左侧索引映射
       };
     },
     computed: {
       currentIndex() { // 映射至左侧
-        for (let i = 0; i < this.listHeight.length - 1; i++) {
+        console.log('currentIndex() this.scrollY:', this.scrollY);
+        console.log('currentIndex() this.listHeight.length:', this.listHeight.length);
+        for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i];
           let height2 = this.listHeight[i + 1];
+          console.log(111);
+          console.log(i);
+          console.log(222);
           if (this.scrollY >= height1 && this.scrollY < height2) {
-            console.log(111);
-            console.log(i);
-            console.log(222);
             return i;
           }
         }
         return this.listHeight.length - 1;
       }
     },
-    created() { // 访问goods数据接口获取goods数据(同App.vue中访问seller接口获取数据的格式，不在App.vue就获取该数据的原因是，需要数据时再访问相关接口）
+    created() { // 访问goods数据接口获取goods数据(同App.vue中访问seller接口获取数据的格式，不在App.vue就获取该数据的原因是，需要数据时再访问相关接口)
       this.$http.get('/api/goods').then(response => {
         // get data
         response = response.body;
@@ -87,35 +89,38 @@
       this.$nextTick(() => {
         this._initScroll();
         this._calculateHeight();
+        console.log('$nextTick this.scrollY:', this.scrollY);
       });
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']; // 对应接口返回数据的5种情况，这里写好上面html代码就可以选择用
     },
     methods: {
       _initScroll() {
-        console.log('this.scrollY1');
-        console.log(this.scrollY);
-        console.log('this.scrollY2');
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {}); // 接收两个参数 1.一个dom对象 2.一个json对象(option),这个组件应该是给这段dom添加了样式什么的
         this.foodScroll = new BScroll(this.$refs.foodWrapper, {
           probeType: 3 // 传这个属性的目的是希望在滚动过程中，随时告诉我Y值
         }); // this.$refs.menuWrapper对应html中的ref="menuWrapper"
         this.foodScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y));
+          console.log('测试');
+          console.log('_initScroll this.scrollY:', this.scrollY);
         });
-        console.log('this.scrollY3');
-        console.log(this.scrollY);
-        console.log('this.scrollY4');
+        console.log('_initScroll 外面this.scrollY:', this.scrollY);
       },
       _calculateHeight() { // 各食品大类区块高度的数组
-        let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook'); // 各食品大类区块的数组
+        console.log('_calculateHeight() this.$refs.foodWrapper:', this.$refs.foodWrapper);
+        console.log('_calculateHeight() this.$refs.foodWrapper.getElementsByClassName(\'food-list\'):', this.$refs.foodWrapper.getElementsByClassName('food-list'));
+        let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list'); // 各食品大类区块的数组，原生js API
+        console.log('_calculateHeight() foodList:', foodList);
+        console.log('_calculateHeight() foodList[2]:', foodList[2]);
         let height = 0;
         this.listHeight.push(height);
+        console.log('_calculateHeight() foodList.length:', foodList.length);
         for (let i = 0; i < foodList.length; i++) {
           let item = foodList[i];
           height += item.clientHeight; // Element.clientHeight是Web API接口获取css信息是元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。
           this.listHeight.push(height);
         }
-        console.log(this.listHeight);
+        console.log('_calculateHeight() this.listHeight', this.listHeight);
       }
     }
   };
@@ -146,10 +151,10 @@
           z-index: 10
           margin-top: -1px
           background: #aaa
-          //font-weight: 700
+          font-weight: 700
           font-size: 30px
-          //.text
-          //  border-none()
+          .text
+            border-none()
         .text
           display: table-cell
           width: 56px
