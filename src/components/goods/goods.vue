@@ -2,9 +2,9 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper"><!--左侧--><!--是一个列表-->
       <ul><!--因为是列表，所以用ul-->
-        <li v-for="item in goods" class="menu-item">
+        <li v-for="(item, index) in goods" class="menu-item" :key="item.id" :class="{'current':currentIndex === index}"><!--当currentIndex===$index执行current样式-->
           <span class="text border-1px"><!--分类名:精选热菜，精选凉菜--><!--border-1px是在base.styl实现的-->
-            <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span><!--同之前的小图标-->
+            <span v-show="item.type>0" class="icon" :class="classMap[item.type]"/><!--同之前的小图标-->
             {{item.name}}
           </span>
         </li>
@@ -43,7 +43,7 @@
   import BScroll from 'better-scroll'; // 引入npm安装的better-scroll组件
   const ERR_OK = 0;
   export default {
-    props: { // 接收外部传入seller数据（这里是App.vue）
+    props: { // 接收外部传入seller数据(这里是App.vue）
       seller: {
         type: Object
       }
@@ -51,10 +51,26 @@
     data() { // 定义属性 ( 返回一个对象),和header.vue,App.vue相同格式
       return {
         goods: [],
-        listHeight: [] // 记录每个右侧区间的高度
+        listHeight: [], // 记录每个右侧区间的高度
+        scrollY: 0 // 实时拿到右侧Y值，和左侧索引映射
       };
     },
-    created() { // 访问goods数据接口获取goods数据（同App.vue中访问seller接口获取数据的格式，不在App.vue就获取该数据的原因是，需要数据时再访问相关接口）
+    computed: {
+      currentIndex() { // 映射至左侧
+        for (let i = 0; i < this.listHeight.length - 1; i++) {
+          let height1 = this.listHeight[i];
+          let height2 = this.listHeight[i + 1];
+          if (this.scrollY >= height1 && this.scrollY < height2) {
+            console.log(111);
+            console.log(i);
+            console.log(222);
+            return i;
+          }
+        }
+        return this.listHeight.length - 1;
+      }
+    },
+    created() { // 访问goods数据接口获取goods数据(同App.vue中访问seller接口获取数据的格式，不在App.vue就获取该数据的原因是，需要数据时再访问相关接口）
       this.$http.get('/api/goods').then(response => {
         // get data
         response = response.body;
@@ -62,17 +78,33 @@
         if (response.errno === ERR_OK) {
           this.goods = response.data;
           console.log(this.goods);
-          this._initScroll();
+          // this._initScroll();
+          // this._calculateHeight();
         }
       }, response => {
         // error callback
+      });
+      this.$nextTick(() => {
+        this._initScroll();
+        this._calculateHeight();
       });
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']; // 对应接口返回数据的5种情况，这里写好上面html代码就可以选择用
     },
     methods: {
       _initScroll() {
-        this.menuScroll = new BScroll(this.$refs.menuWrapper, {}); // 接收两个参数 1.一个dom对象 2.一个json对象（option）,这个组件应该是给这段dom添加了样式什么的
-        this.foodScroll = new BScroll(this.$refs.foodWrapper, {}); // this.$refs.menuWrapper对应html中的ref="menuWrapper"
+        console.log('this.scrollY1');
+        console.log(this.scrollY);
+        console.log('this.scrollY2');
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {}); // 接收两个参数 1.一个dom对象 2.一个json对象(option),这个组件应该是给这段dom添加了样式什么的
+        this.foodScroll = new BScroll(this.$refs.foodWrapper, {
+          probeType: 3 // 传这个属性的目的是希望在滚动过程中，随时告诉我Y值
+        }); // this.$refs.menuWrapper对应html中的ref="menuWrapper"
+        this.foodScroll.on('scroll', (pos) => {
+          this.scrollY = Math.abs(Math.round(pos.y));
+        });
+        console.log('this.scrollY3');
+        console.log(this.scrollY);
+        console.log('this.scrollY4');
       },
       _calculateHeight() { // 各食品大类区块高度的数组
         let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list-hook'); // 各食品大类区块的数组
@@ -83,6 +115,7 @@
           height += item.clientHeight; // Element.clientHeight是Web API接口获取css信息是元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。
           this.listHeight.push(height);
         }
+        console.log(this.listHeight);
       }
     }
   };
@@ -108,6 +141,15 @@
         width: 56px
         line-height: 14px
         padding: 0 12px
+        &.current // 右边对应的左边区块会变白，字体会加粗
+          position: relative
+          z-index: 10
+          margin-top: -1px
+          background: #aaa
+          //font-weight: 700
+          font-size: 30px
+          //.text
+          //  border-none()
         .text
           display: table-cell
           width: 56px
