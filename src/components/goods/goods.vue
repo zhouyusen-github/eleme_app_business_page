@@ -52,21 +52,21 @@
       return {
         goods: [],
         listHeight: [], // 记录每个右侧区间的高度
-        scrollY: 5 // 实时拿到右侧Y值，和左侧索引映射
+        scrollY: 0 // 实时拿到右侧Y值，和左侧索引映射
       };
     },
     computed: {
       currentIndex() { // 映射至左侧
         console.log('currentIndex() this.scrollY:', this.scrollY);
         console.log('currentIndex() this.listHeight.length:', this.listHeight.length);
-        for (let i = 0; i < this.listHeight.length; i++) {
+        for (let i = 0; i < this.listHeight.length - 1; i++) {
           let height1 = this.listHeight[i];
           let height2 = this.listHeight[i + 1];
           console.log(111);
           console.log(i);
           console.log(222);
           if (this.scrollY >= height1 && this.scrollY < height2) {
-            return i;
+            return (i - 1);
           }
         }
         return this.listHeight.length - 1;
@@ -80,16 +80,11 @@
         if (response.errno === ERR_OK) {
           this.goods = response.data;
           console.log(this.goods);
-          // this._initScroll();
-          // this._calculateHeight();
+          this._initScroll();
+          this._calculateHeight();
         }
       }, response => {
         // error callback
-      });
-      this.$nextTick(() => {
-        this._initScroll();
-        this._calculateHeight();
-        console.log('$nextTick this.scrollY:', this.scrollY);
       });
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']; // 对应接口返回数据的5种情况，这里写好上面html代码就可以选择用
     },
@@ -121,6 +116,14 @@
           this.listHeight.push(height);
         }
         console.log('_calculateHeight() this.listHeight', this.listHeight);
+      }
+    },
+    watch: {
+      goods: function () {
+        this.$nextTick(function() {
+          this._initScroll();
+          this._calculateHeight();
+        });
       }
     }
   };
