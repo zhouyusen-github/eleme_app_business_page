@@ -66,7 +66,7 @@
           console.log(i);
           console.log(222);
           if (this.scrollY >= height1 && this.scrollY < height2) {
-            return (i - 1);
+            return i;
           }
         }
         return this.listHeight.length - 1;
@@ -80,8 +80,6 @@
         if (response.errno === ERR_OK) {
           this.goods = response.data;
           console.log(this.goods);
-          this._initScroll();
-          this._calculateHeight();
         }
       }, response => {
         // error callback
@@ -112,7 +110,7 @@
         console.log('_calculateHeight() foodList.length:', foodList.length);
         for (let i = 0; i < foodList.length; i++) {
           let item = foodList[i];
-          height += item.clientHeight; // Element.clientHeight是Web API接口获取css信息是元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。
+          height += (item.clientHeight + 18); // Element.clientHeight是Web API接口获取css信息是元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。
           this.listHeight.push(height);
         }
         console.log('_calculateHeight() this.listHeight', this.listHeight);
