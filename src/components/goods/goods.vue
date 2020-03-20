@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper"><!--左侧--><!--是一个列表-->
       <ul><!--因为是列表，所以用ul-->
-        <li v-for="(item, index) in goods" class="menu-item border-1px" :key="index" :class="{'current':index === currentIndex}"><!--当currentIndex===$index执行current样式-->
+        <li v-for="(item, index) in goods" class="menu-item border-1px" :class="{'current':index === currentIndex}"><!--当currentIndex===index执行current样式-->
           <span class="text border-1px"><!--分类名:精选热菜，精选凉菜--><!--border-1px是在base.styl实现的-->
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"/><!--同之前的小图标-->
             {{item.name}}
@@ -56,16 +56,11 @@
       };
     },
     computed: {
-      currentIndex() { // 映射至左侧
-        console.log('currentIndex() this.scrollY:', this.scrollY);
-        console.log('currentIndex() this.listHeight.length:', this.listHeight.length);
+      currentIndex() { // 左侧根据右侧滑动而变动实现
         for (let i = 0; i < this.listHeight.length - 1; i++) {
           let height1 = this.listHeight[i];
           let height2 = this.listHeight[i + 1];
-          console.log(111);
-          console.log(i);
-          console.log(222);
-          if (this.scrollY >= height1 && this.scrollY < height2) {
+          if (this.scrollY >= height1 && this.scrollY < height2) { // 原理:better-scroll返回的滑动高度和.scrollHeight算出各食品分类区块的高度比较，返回符合的index，给html代码去做对应处理
             return i;
           }
         }
@@ -76,10 +71,8 @@
       this.$http.get('/api/goods').then(response => {
         // get data
         response = response.body;
-        console.log(response);
         if (response.errno === ERR_OK) {
           this.goods = response.data;
-          console.log(this.goods);
         }
       }, response => {
         // error callback
@@ -91,29 +84,20 @@
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {}); // 接收两个参数 1.一个dom对象 2.一个json对象(option),这个组件应该是给这段dom添加了样式什么的
         this.foodScroll = new BScroll(this.$refs.foodWrapper, {
           probeType: 3 // 传这个属性的目的是希望在滚动过程中，随时告诉我Y值
-        }); // this.$refs.menuWrapper对应html中的ref="menuWrapper"
+        }); // this.$refs.menuWrapper对应html中的ref="menuWrapper"所在那块dom对象
         this.foodScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y));
-          console.log('测试');
-          console.log('_initScroll this.scrollY:', this.scrollY);
         });
-        console.log('_initScroll 外面this.scrollY:', this.scrollY);
       },
       _calculateHeight() { // 各食品大类区块高度的数组
-        console.log('_calculateHeight() this.$refs.foodWrapper:', this.$refs.foodWrapper);
-        console.log('_calculateHeight() this.$refs.foodWrapper.getElementsByClassName(\'food-list\'):', this.$refs.foodWrapper.getElementsByClassName('food-list'));
         let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list'); // 各食品大类区块的数组，原生js API
-        console.log('_calculateHeight() foodList:', foodList);
-        console.log('_calculateHeight() foodList[2]:', foodList[2]);
         let height = 0;
         this.listHeight.push(height);
-        console.log('_calculateHeight() foodList.length:', foodList.length);
         for (let i = 0; i < foodList.length; i++) {
           let item = foodList[i];
-          height += (item.clientHeight + 18); // Element.clientHeight是Web API接口获取css信息是元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。
+          height += (item.scrollHeight); // Element.scrollHeight是内容 + 内边距 + 边框 + 外边距 （如果有滚动条再加上滚动条的大小）的高。比clientHeight多了外边距
           this.listHeight.push(height);
         }
-        console.log('_calculateHeight() this.listHeight', this.listHeight);
       }
     },
     watch: {
@@ -151,10 +135,9 @@
           position: relative
           z-index: 10
           margin-top: -1px
-          background: #aaa
-          font-weight: 700
-          font-size: 30px
+          background: #fff
           .text
+            font-weight: 700 // 字符加粗,代码写在这一层才有效，加上一层会被下面的font-size: 12px影响而失效
             border-none()
         .text
           display: table-cell
