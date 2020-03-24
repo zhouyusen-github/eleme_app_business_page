@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper"><!--左侧--><!--是一个列表-->
       <ul><!--因为是列表，所以用ul-->
-        <li v-for="(item, index) in goods" class="menu-item border-1px" :class="{'current':index === currentIndex}"><!--当currentIndex===index执行current样式-->
+        <li v-for="(item, index) in goods" class="menu-item border-1px" :class="{'current':index === currentIndex}" @click="selectMenu(index)"><!--当currentIndex===index执行current样式-->
           <span class="text border-1px"><!--分类名:精选热菜，精选凉菜--><!--border-1px是在base.styl实现的-->
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"/><!--同之前的小图标-->
             {{item.name}}
@@ -80,8 +80,16 @@
       this.classMap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']; // 对应接口返回数据的5种情况，这里写好上面html代码就可以选择用
     },
     methods: {
+      selectMenu(index) {
+        let foodList = this.$refs.foodWrapper.getElementsByClassName('food-list');
+        let el = foodList[index]; // 根据index找到对应食品分类的dom
+        this.foodScroll.scrollToElement(el, 300); // 还是调用了BScroll的方法
+        console.log(index);
+      },
       _initScroll() {
-        this.menuScroll = new BScroll(this.$refs.menuWrapper, {}); // 接收两个参数 1.一个dom对象 2.一个json对象(option),这个组件应该是给这段dom添加了样式什么的
+        this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+          click: true // 设置成true，才不会覆盖默认的点击事件
+        }); // 接收两个参数 1.一个dom对象 2.一个json对象(option),这个组件应该是给这段dom添加了样式什么的
         this.foodScroll = new BScroll(this.$refs.foodWrapper, {
           probeType: 3 // 传这个属性的目的是希望在滚动过程中，随时告诉我Y值
         }); // this.$refs.menuWrapper对应html中的ref="menuWrapper"所在那块dom对象
