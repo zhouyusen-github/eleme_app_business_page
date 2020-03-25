@@ -36,7 +36,7 @@
         </li>
       </ul>
     </div>
-    <shopcart></shopcart>
+    <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart><!--传入配送费和起送费-->
   </div>
 </template>
 
