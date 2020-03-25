@@ -6,8 +6,9 @@
           <div class="logo">
             <span class="icon-shopping_cart"></span><!--引入图标字体文件，来自icon.styl-->
           </div>
+          <div class="num">{{totalCount}}</div>
         </div>
-        <div class="price">￥0</div>
+        <div class="price">￥{{totalPrice}}</div>
         <div class="description">另需配送费￥{{deliveryPrice}}元</div>
       </div>
       <div class="content-right">
@@ -22,6 +23,18 @@
 <script type="text/ecmascript-6">
   export default {
     props: { // 接收外部传入seller数据(这里是App.vue)
+      selectFoods: { // 保存了选择商品的数组
+        type: Array,
+        default() {
+          // return [];
+          return [
+            {
+              price: 10,
+              count: 1
+            }
+          ];
+        }
+      },
       deliveryPrice: {
         type: Number,
         default: 0
@@ -29,6 +42,22 @@
       minPrice: {
         type: Number,
         default: 0
+      }
+    },
+    computed: {
+      totalPrice () { // 依赖selectFoods，计算所有想购买商品总价
+        let total = 0;
+        this.selectFoods.forEach((food) => {
+          total += food.price * food.count;
+        });
+        return total;
+      },
+      totalCount () { // 依赖selectFoods，计算所有想购买商品总数，用于购物车右上角的数字
+        let total = 0;
+        this.selectFoods.forEach((food) => {
+          total += food.count;
+        });
+        return total;
       }
     }
   };
@@ -62,6 +91,20 @@
           text-align: center // 把文本排列到中间
           border-radius: 50% //圆角设50%那么就是个圆
           background: #141d27
+          .num
+            position: absolute
+            top: 0
+            right: 0
+            width: 24px
+            height: 16px
+            line-height: 16px
+            text-align: center
+            border-radius:16px
+            font-size: 9px
+            font-weight: 700
+            color: #fff
+            background: rgb(240, 20, 20)
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4) // 阴影
           .logo
             width:100% //宽高撑满父元素
             height:100%
