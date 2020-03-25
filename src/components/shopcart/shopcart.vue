@@ -7,16 +7,31 @@
             <span class="icon-shopping_cart"></span><!--引入图标字体文件，来自icon.styl-->
           </div>
         </div>
-        <div class="price"></div>
-        <div class="description"></div>
+        <div class="price">￥0</div>
+        <div class="description">另需配送费￥{{deliveryPrice}}元</div>
       </div>
-      <div class="content-right"></div>
+      <div class="content-right">
+        <div class="pay">
+          ￥{{minPrice}}起配送
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default {};
+  export default {
+    props: { // 接收外部传入seller数据(这里是App.vue)
+      deliveryPrice: {
+        type: Number,
+        default: 0
+      },
+      minPrice: {
+        type: Number,
+        default: 0
+      }
+    }
+  };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -31,6 +46,7 @@
       display: flex
       background: #141d27
       font-size: 0 // 消去inline-block间隙
+      color: rgba(244,255,255,0.4)
       .content-left
         flex: 1
         .logo-wrapper
@@ -57,9 +73,29 @@
               color: #80858a
         .price
           display: inline-block
+          vertical-align: top
+          margin-top: 12px
+          line-height: 24px
+          padding-right: 12px
+          box-sizing: border-box
+          border-right: 1px solid rgba(244,255,255,0.1)
+          font-size: 16px
+          font-weight: 700
         .description
           display: inline-block
+          vertical-align: top
+          line-height: 24px
+          margin: 12px 0 0 12px
+          font-size: 10px
+          font-weight: 400
       .content-right
         flex: 0 0 105 -ms-background-position-x
         width: 105px
+        .pay
+          height: 48px
+          line-height: 48px
+          text-align: center
+          font-size: 12px
+          font-weight: 700
+          background: #2b333b
 </style>
