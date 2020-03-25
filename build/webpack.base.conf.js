@@ -31,12 +31,13 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
-  resolve: {
+  resolve: { // 路径注册在这里到时候统一改方便
     extensions: ['.js', '.vue', '.json', '.styl'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'common': path.resolve(__dirname, '../src/components/common')
+      'common': path.resolve(__dirname, '../src/components/common'),
+      'components': path.resolve(__dirname, '../src/components')
     }
   },
   module: {
