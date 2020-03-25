@@ -36,11 +36,13 @@
         </li>
       </ul>
     </div>
+    <shopcart></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'; // 引入npm安装的better-scroll组件
+  import shopcart from 'components/shopcart/shopcart';
   const ERR_OK = 0;
   export default {
     props: { // 接收外部传入seller数据(这里是App.vue)
@@ -107,6 +109,9 @@
           this.listHeight.push(height);
         }
       }
+    },
+    components: {
+      shopcart // 所有引用的组件都要在components注册，header.vue和App.vue都是这样
     },
     watch: {
       goods: function () {
