@@ -3,8 +3,8 @@
     <div class="content">
       <div class="content-left">
         <div class="logo-wrapper"><!--包装logo的wrapper-->
-          <div class="logo">
-            <span class="icon-shopping_cart"></span><!--引入图标字体文件，来自icon.styl-->
+          <div class="logo" :class="{'highlight':totalCount>0}">
+            <span class="icon-shopping_cart" :class="{'highlight':totalCount>0}"></span><!--引入图标字体文件，来自icon.styl-->
           </div>
           <div class="num">{{totalCount}}</div>
         </div>
@@ -110,10 +110,14 @@
             height:100%
             border-radius: 50%
             background: #2b343c // 老师使用ps取色器取到这个颜色的
+            &.highlight  // 有买了商品后，背景会变蓝色
+              background: rgb(0, 160, 220)
             .icon-shopping_cart
               line-height: 44px
               font-size: 24px
               color: #80858a
+              &.highlight // 有买了商品后，logo会变白色
+                color: #fff
         .price
           display: inline-block
           vertical-align: top
