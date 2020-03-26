@@ -6,14 +6,14 @@
           <div class="logo" :class="{'highlight':totalCount>0}">
             <span class="icon-shopping_cart" :class="{'highlight':totalCount>0}"></span><!--引入图标字体文件，来自icon.styl-->
           </div>
-          <div class="num">{{totalCount}}</div>
+          <div class="num" v-show="totalCount>0">{{totalCount}}</div><!--没购买商品不显示-->
         </div>
-        <div class="price">￥{{totalPrice}}</div>
+        <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
         <div class="description">另需配送费￥{{deliveryPrice}}元</div>
       </div>
       <div class="content-right">
-        <div class="pay">
-          ￥{{minPrice}}起配送
+        <div class="pay" :class="payClass">
+          {{payDescription}}
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
 <script type="text/ecmascript-6">
   export default {
     props: { // 接收外部传入seller数据(这里是App.vue)
-      selectFoods: { // 保存了选择商品的数组
+      selectFoods: { // 保存了选择商品的数组,这个组件每个计算属性都依赖它
         type: Array,
         default() {
           // return [];
@@ -58,6 +58,23 @@
           total += food.count;
         });
         return total;
+      },
+      payDescription () {
+        if (this.totalPrice === 0) {
+          return `￥${this.minPrice}元起送`; // ES6特性``内$后动态内容会填在$位置，比''要字符串拼接方便
+        } else if (this.totalPrice < this.minPrice) {
+          let difference = this.minPrice - this.totalPrice;
+          return `还差￥${difference}元起送`;
+        } else {
+          return '去结算';
+        }
+      },
+      payClass() {
+        if (this.totalPrice < this.minPrice) {
+          return 'not-enough';
+        } else {
+          return 'enough';
+        }
       }
     }
   };
@@ -128,6 +145,8 @@
           border-right: 1px solid rgba(244,255,255,0.1)
           font-size: 16px
           font-weight: 700
+          &.highlight // 有购买商品后价格会高亮
+            color: #fff
         .description
           display: inline-block
           vertical-align: top
@@ -144,5 +163,9 @@
           text-align: center
           font-size: 12px
           font-weight: 700
-          background: #2b333b
+          &.not-enough
+            background: #2b333b
+          &.enough
+            background: #00b43c
+            color: #fff
 </style>
