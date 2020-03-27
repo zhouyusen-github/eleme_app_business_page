@@ -31,7 +31,7 @@
                   <span class="old_price" v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
                 </div>
                 <div class="cartcontrol-wrapper"><!--控制cartcontrol组件位置-->
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartcontrol :food="food"/>
                 </div>
               </div>
             </li>
@@ -39,7 +39,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :selectFoods = "selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart><!--传入配送费和起送费-->
+    <shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"/><!--传入配送费和起送费-->
   </div>
 </template>
 
@@ -72,7 +72,7 @@
         }
         return this.listHeight.length - 1;
       },
-      selectFoods() { // goods是商品大类列表，food是商品大类中的商品列表
+      selectFoods() { // goods是商品大类列表，food是商品大类中的商品列表，这里是读取所有food，如果有count，就把food推进selectFoods的数组
         let foods = [];
         this.goods.forEach((good) => {
           good.foods.forEach((food) => {

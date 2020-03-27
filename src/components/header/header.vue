@@ -31,7 +31,7 @@
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
     <transition name="fade"><!--需要跳转动画的，用transition框起来即可，则是vue2.x的做法-->
-    <div v-show="detailShow" class="detail"><!--弹层页,v-show来控制是否显示-->
+      <div v-show="detailShow" class="detail"><!--弹层页,v-show来控制是否显示-->
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
