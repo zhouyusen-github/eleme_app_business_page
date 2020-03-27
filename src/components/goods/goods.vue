@@ -30,6 +30,9 @@
                   <span class="now_price">￥{{food.price}}</span>
                   <span class="old_price" v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
                 </div>
+                <div class="cartcontrol-wrapper"><!--控制cartcontrol组件位置-->
+                  <cartcontrol :food="food"></cartcontrol>
+                </div>
               </div>
             </li>
           </ul>
@@ -43,6 +46,7 @@
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'; // 引入npm安装的better-scroll组件
   import shopcart from 'components/shopcart/shopcart';
+  import cartcontrol from 'components/cartcontrol/cartcontrol';
   const ERR_OK = 0;
   export default {
     props: { // 接收外部传入seller数据(这里是App.vue)
@@ -93,6 +97,7 @@
           click: true // 设置成true，才不会覆盖默认的点击事件
         }); // 接收两个参数 1.一个dom对象 2.一个json对象(option),这个组件应该是给这段dom添加了样式什么的
         this.foodScroll = new BScroll(this.$refs.foodWrapper, {
+          click: true,
           probeType: 3 // 传这个属性的目的是希望在滚动过程中，随时告诉我Y值
         }); // this.$refs.menuWrapper对应html中的ref="menuWrapper"所在那块dom对象
         this.foodScroll.on('scroll', (pos) => {
@@ -111,7 +116,8 @@
       }
     },
     components: {
-      shopcart // 所有引用的组件都要在components注册，header.vue和App.vue都是这样
+      shopcart, // 所有引用的组件都要在components注册，header.vue和App.vue都是这样
+      cartcontrol
     },
     watch: {
       goods: function () {
@@ -228,4 +234,8 @@
               font-size: 10px
               color: rgb(147, 153, 159)
 
+          .cartcontrol-wrapper
+            position: absolute
+            right: 0
+            bottom: 12px
 </style>
