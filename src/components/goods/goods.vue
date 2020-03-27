@@ -39,7 +39,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart><!--传入配送费和起送费-->
+    <shopcart :selectFoods = "selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart><!--传入配送费和起送费-->
   </div>
 </template>
 
@@ -56,7 +56,7 @@
     },
     data() { // 定义属性 ( 返回一个对象),和header.vue,App.vue相同格式
       return {
-        goods: [],
+        goods: [], // created会把这个变成json中的商品大类列表
         listHeight: [], // 记录每个右侧区间的高度
         scrollY: 0 // 实时拿到右侧Y值，和左侧索引映射
       };
@@ -71,6 +71,17 @@
           }
         }
         return this.listHeight.length - 1;
+      },
+      selectFoods() { // goods是商品大类列表，food是商品大类中的商品列表
+        let foods = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food);
+            }
+          });
+        });
+        return foods;
       }
     },
     created() { // 访问goods数据接口获取goods数据(同App.vue中访问seller接口获取数据的格式，不在App.vue就获取该数据的原因是，需要数据时再访问相关接口)
