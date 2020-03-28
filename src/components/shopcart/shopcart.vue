@@ -17,7 +17,8 @@
         </div>
       </div>
     </div>
-    <div class="shopcart-list" v-show="listShow()"><!--购物车详情栏-->
+    <transition name="shopcartList">
+      <div class="shopcart-list" v-show="listShow()"><!--购物车详情栏-->
         <div class="list-header">
           <h1 class="title">购物车</h1>
           <span class="empty" @click="emptySelectFoods()">清空</span>
@@ -36,6 +37,7 @@
           </ul>
         </div>
       </div>
+    </transition>
   </div>
 </template>
 
@@ -230,14 +232,13 @@
     .shopcart-list
       position: absolute
       left: 0
-      top: -300px
+      top: 0
       z-index: -1 // 因为需要被购物栏的圆挡住
       width: 100%
-      /*transition: all 1.5s
-      &.fold-transition
-        tranform: translate3d(0, -100%, 0)
-      &.fade-enter, &.fade-leave-to
-        tranform: translate3d(0, 0, 0)*/
+      transform: translate3d(0, -100%, 0) // 上移自身高度
+      transition: all 1.5s
+      &.shopcartList-enter, &.shopcartList-leave-to // 进入过渡的开始状态,离开过渡的结束状态
+        transform: translate3d(0, 0, 0)
       .list-header
         height: 40px
         line-height: 40px
