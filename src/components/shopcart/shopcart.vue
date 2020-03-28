@@ -22,7 +22,7 @@
           <h1 class="title">购物车</h1>
           <span class="empty">清空</span>
         </div>
-        <div class="list-content" ref="listContent">
+        <div ref="listContent" class="list-content"><!--ref="listContent"是把dom传递给后面dom实现-->
           <ul>
             <li class="food" v-for="food in selectFoods">
               <span class="name">{{food.name}}</span>
@@ -40,7 +40,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  // import BScroll from 'better-scroll';
+  import BScroll from 'better-scroll';
   import cartcontrol from 'components/cartcontrol/cartcontrol';
   export default {
     components: {
@@ -108,7 +108,6 @@
           return false;
         } else {
           let show = !this.fold; // 有商品时还要看this.fold要不要你展开，this.fold受点击togglelist影响的
-          /*
           if (show) {
             this.$nextTick(() => {
               this.scroll = new BScroll(this.$refs.listContent, {
@@ -116,7 +115,6 @@
               });
             });
           }
-           */
           return show;
         }
       },
@@ -128,13 +126,6 @@
       },
       clean () {
 
-      }
-    },
-    watch: {
-      goods: function () {
-        this.$nextTick(function() {
-          this._initScroll();
-        });
       }
     }
   };
