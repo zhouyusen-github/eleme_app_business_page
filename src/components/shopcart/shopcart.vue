@@ -1,6 +1,6 @@
 <template>
   <div class="shopcart">
-    <div class="content">
+    <div class="content" @click="togglelist"><!--togglelist点击展开购物车详情页-->
       <div class="content-left">
         <div class="logo-wrapper"><!--包装logo的wrapper-->
           <div class="logo" :class="{'highlight':totalCount>0}">
@@ -17,22 +17,41 @@
         </div>
       </div>
     </div>
+    <div class="shopcart-list" v-show="listShow()"><!--购物车详情栏-->
+        <div class="list-header">
+          <h1 class="title">购物车</h1>
+          <span class="empty">清空</span>
+        </div>
+        <div class="list-content" ref="listContent">
+          <ul>
+            <li class="food" v-for="food in selectFoods">
+              <span class="name">{{food.name}}</span>
+              <div class="price">
+                <span>￥{{food.price*food.count}}</span>
+              </div>
+              <div class="cartcontrol-wrapper">
+                <cartcontrol :food="food"></cartcontrol>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  // import BScroll from 'better-scroll';
+  import cartcontrol from 'components/cartcontrol/cartcontrol';
   export default {
+    components: {
+      cartcontrol
+    },
     props: { // 接收外部传入seller数据(这里是App.vue)
       selectFoods: { // 保存了选择商品的数组,这个组件每个计算属性都依赖它
         type: Array,
         default() {
           // return [];
-          return [
-            {
-              price: 10,
-              count: 1
-            }
-          ];
+          return [];
         }
       },
       deliveryPrice: {
@@ -43,6 +62,11 @@
         type: Number,
         default: 0
       }
+    },
+    data() {
+      return {
+        fold: true // 默认购物车详情栏折叠状态
+      };
     },
     computed: {
       totalPrice () { // 依赖selectFoods，计算所有想购买商品总价
@@ -76,11 +100,48 @@
           return 'enough';
         }
       }
+    },
+    methods: {
+      listShow() {
+        if (this.totalCount === 0) {
+          this.fold = true;
+          return false;
+        } else {
+          let show = !this.fold; // 有商品时还要看this.fold要不要你展开，this.fold受点击togglelist影响的
+          /*
+          if (show) {
+            this.$nextTick(() => {
+              this.scroll = new BScroll(this.$refs.listContent, {
+                click: true // 设置成true，才不会覆盖默认的点击事件
+              });
+            });
+          }
+           */
+          return show;
+        }
+      },
+      togglelist () {
+        if (!this.totalCount) {
+          return;
+        }
+        this.fold = !this.fold; // 展开变收起，收起变展开
+      },
+      clean () {
+
+      }
+    },
+    watch: {
+      goods: function () {
+        this.$nextTick(function() {
+          this._initScroll();
+        });
+      }
     }
   };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import '../common/stylus/mixin';
   .shopcart
     position: fixed // 生成绝对定位的元素，相对于浏览器窗口进行定位。而absolute是相对于父元素
     left: 0
@@ -168,4 +229,56 @@
           &.enough
             background: #00b43c
             color: #fff
+    .shopcart-list
+      position: absolute
+      left: 0
+      top: -300px
+      z-index: -1 // 因为需要被购物栏的圆挡住
+      width: 100%
+      /*transition: all 1.5s
+      &.fold-transition
+        tranform: translate3d(0, -100%, 0)
+      &.fade-enter, &.fade-leave-to
+        tranform: translate3d(0, 0, 0)*/
+      .list-header
+        height: 40px
+        line-height: 40px
+        padding: 0 18px
+        background: #f3f5f7
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1) // 厚度设计图上没标需要看出来
+        .title
+          float: left // 浮动至左侧
+          font-size: 14px
+          font-weight: 200
+          color: rgb(7,17,27)
+        .empty
+          float: right
+          font-size: 12px
+          color: rgb(0,160,220)
+      .list-content
+        padding: 0 18px
+        max-height: 217px // 最大宽度，再高就不增高了
+        overflow: hidden
+        background: #fff
+        .food
+          position: relative
+          padding: 12px 0
+          box-sizing: border-box
+          border-1px(rgba(7, 17, 27, 0.1))
+          .name
+            line-height: 24px
+            font-size: 14px
+            color: rgb(7, 17, 27)
+          .price
+            position: absolute
+            right: 90px // 这里和上面的浮动定位的方式不同了，也是可以的，因为一行有三个东西，90距离是算出来的
+            bottom: 12px
+            line-height: 24px
+            font-size: 14px
+            font-weight: 700
+            color: rgb(240, 20, 20)
+          .cartcontrol-wrapper
+            position: absolute
+            right: 0
+            bottom: 6px
 </style>
