@@ -20,7 +20,7 @@
     <div class="shopcart-list" v-show="listShow()"><!--购物车详情栏-->
         <div class="list-header">
           <h1 class="title">购物车</h1>
-          <span class="empty">清空</span>
+          <span class="empty" @click="emptySelectFoods()">清空</span>
         </div>
         <div ref="listContent" class="list-content"><!--ref="listContent"是把dom传递给后面dom实现-->
           <ul>
@@ -128,8 +128,11 @@
         }
         this.fold = !this.fold; // 展开变收起，收起变展开
       },
-      clean () {
-
+      emptySelectFoods () {
+        this.selectFoods.forEach((food) => {
+          food.count = 0;
+        });
+        // this.selectFoods = []; 不要这样，这会导致bug的
       }
     }
   };
