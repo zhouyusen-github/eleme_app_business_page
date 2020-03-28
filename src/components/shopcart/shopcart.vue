@@ -109,11 +109,15 @@
         } else {
           let show = !this.fold; // 有商品时还要看this.fold要不要你展开，this.fold受点击togglelist影响的
           if (show) {
-            this.$nextTick(() => {
-              this.scroll = new BScroll(this.$refs.listContent, {
-                click: true // 设置成true，才不会覆盖默认的点击事件
+            if (!this.scroll) {
+              this.$nextTick(() => {
+                this.scroll = new BScroll(this.$refs.listContent, {
+                  click: true // 设置成true，才不会覆盖默认的点击事件
+                });
               });
-            });
+            } else {
+              this.scroll.refresh();
+            }
           }
           return show;
         }
