@@ -1,7 +1,9 @@
 <template>
   <transition name="move">
     <div v-show="showFlag" class="food">
-
+      <div class="image-header">
+        <img :src="food.image">
+      </div>
     </div>
   </transition>
 </template>
@@ -39,4 +41,14 @@
     transition: all 3.5s
     &.move-enter, &.move-leave-to
       transform: translate3d(100%, 0, 0)
+    .image-header // 样式需要处理的问题是，在不知道图片大小，且图片没加载出来前就占好位置，避免抖动的现象
+      position: relative
+      height: 0
+      padding-top: 100% // 定义基于父元素宽度的百分比上内边距，这样就是这块就是撑到一个正方形了
+      img // 图片撑满上面给的空间
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
 </style>
