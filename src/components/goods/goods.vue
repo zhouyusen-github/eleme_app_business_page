@@ -40,7 +40,7 @@
       </ul>
     </div>
     <shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"/><!--传入配送费和起送费-->
-    <food :food="selectedFood"></food><!--教程中这一块放外面是不行的-->
+    <food :food="selectedFood" ref="food" ></food><!--教程中这一块放外面是不行的-->
   </div>
 </template>
 
@@ -108,6 +108,7 @@
       },
       selectFood(food) { // 函数名和值名不能同名
         this.selectedFood = food;
+        this.$refs.food.show();
       },
       _initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {
