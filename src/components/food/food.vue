@@ -3,6 +3,9 @@
     <div v-show="showFlag" class="food">
       <div class="image-header">
         <img :src="food.image">
+        <div class="back" @click="hide"><!--返回按钮-->
+          <i class="icon-arrow_lift"></i>
+        </div>
       </div>
     </div>
   </transition>
@@ -22,7 +25,10 @@
    },
    methods: {
      show() {
-        this.showFlag = true;
+       this.showFlag = true;
+     },
+     hide() {
+       this.showFlag = false;
      }
    }
  };
@@ -38,7 +44,7 @@
     z-index: 30 // 为了在堆叠顺序上，不覆盖购物车弹开的框
     width: 100%
     background: #fff
-    transition: all 3.5s
+    transition: all 1s
     &.move-enter, &.move-leave-to
       transform: translate3d(100%, 0, 0)
     .image-header // 样式需要处理的问题是，在不知道图片大小，且图片没加载出来前就占好位置，避免抖动的现象
@@ -51,4 +57,13 @@
         left: 0
         width: 100%
         height: 100%
+      .back
+        position: absolute
+        top: 10px
+        left: 0px
+        .icon-arrow_lift
+          display: block
+          padding: 10px // 让点击区域变大好点一点
+          font-size: 20px
+          color: #fff
 </style>
