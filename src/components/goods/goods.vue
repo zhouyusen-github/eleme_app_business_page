@@ -12,7 +12,7 @@
     </div>
     <div class="foods-wrapper" ref="foodWrapper"><!--右侧-->
       <ul>
-        <li v-for="item in goods" class="food-list"><!--各个分类名先一个循环--><!--末尾加hook是一个编程习惯，表明这只是为了被js选择，没有实际的效果-->
+        <li @click="selectFood(food)" v-for="item in goods" class="food-list"><!--各个分类名先一个循环--><!--末尾加hook是一个编程习惯，表明这只是为了被js选择，没有实际的效果-->
           <h1 class="title">{{item.name}}</h1>
           <ul>
             <li v-for="food in item.foods" class="food-item border-1px"><!--各个分类名下有多个食品-->
@@ -40,6 +40,7 @@
       </ul>
     </div>
     <shopcart :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"/><!--传入配送费和起送费-->
+    <food :food="selectedFood"></food><!--教程中这一块放外面是不行的-->
   </div>
 </template>
 
@@ -47,6 +48,7 @@
   import BScroll from 'better-scroll'; // 引入npm安装的better-scroll组件
   import shopcart from 'components/shopcart/shopcart';
   import cartcontrol from 'components/cartcontrol/cartcontrol';
+  import food from 'components/food/food';
   const ERR_OK = 0;
   export default {
     props: { // 接收外部传入seller数据(这里是App.vue)
@@ -58,7 +60,8 @@
       return {
         goods: [], // created会把这个变成json中的商品大类列表
         listHeight: [], // 记录每个右侧区间的高度
-        scrollY: 0 // 实时拿到右侧Y值，和左侧索引映射
+        scrollY: 0, // 实时拿到右侧Y值，和左侧索引映射
+        selectedFood: {}
       };
     },
     computed: {
@@ -103,6 +106,9 @@
         this.foodScroll.scrollToElement(el, 300); // 还是调用了BScroll的方法
         console.log(index);
       },
+      selectFood(food) { // 函数名和值名不能同名
+        this.selectedFood = food;
+      },
       _initScroll() {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, {
           click: true // 设置成true，才不会覆盖默认的点击事件
@@ -128,7 +134,8 @@
     },
     components: {
       shopcart, // 所有引用的组件都要在components注册，header.vue和App.vue都是这样
-      cartcontrol
+      cartcontrol,
+      food
     },
     watch: {
       goods: function () {
