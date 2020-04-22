@@ -12,10 +12,10 @@
     </div>
     <div class="foods-wrapper" ref="foodWrapper"><!--右侧-->
       <ul>
-        <li @click="selectFood(food)" v-for="item in goods" class="food-list"><!--各个分类名先一个循环--><!--末尾加hook是一个编程习惯，表明这只是为了被js选择，没有实际的效果-->
+        <li v-for="item in goods" class="food-list"><!--各个分类名先一个循环--><!--末尾加hook是一个编程习惯，表明这只是为了被js选择，没有实际的效果-->
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item border-1px"><!--各个分类名下有多个食品-->
+            <li @click="selectFood(food)" v-for="food in item.foods" class="food-item border-1px"><!--各个分类名下有多个食品-->
               <div class="icon"><!--食品图标-->
                 <img width="57" height="57" :src="food.icon">
               </div>
