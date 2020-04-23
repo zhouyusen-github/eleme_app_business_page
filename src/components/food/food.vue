@@ -27,6 +27,11 @@
           <h1 class="title">商品消息</h1>
           <p class="text">{{food.info}}</p>
         </div>
+        <split></split>
+        <div class="rating">
+          <h1 class="title">商品评价</h1>
+          <ratingselect :selectType="selectType" :onlyContent="onlyContent" :desc="desc" :ratings="food.ratings"></ratingselect>
+        </div>
       </div>
     </div>
   </transition>
@@ -36,7 +41,10 @@
   import BScroll from 'better-scroll';
   import cartcontrol from 'components/cartcontrol/cartcontrol';
   import split from 'components/split/split';
+  import ratingselect from 'components/ratingselect/ratingselect';
   import Vue from 'vue';
+
+  const ALL = 2;
 
   export default {
    props: { // goods.vue传入这个值
@@ -46,7 +54,15 @@
    },
    data() {
      return {
-       showFlag: false
+       showFlag: false,
+       // 需要传给ratingselect组件的数据
+       selectType: ALL,
+       onlyContent: true,
+       desc: {
+         all: '全部',
+         positive: '推荐',
+         negative: '吐槽'
+       }
      };
    },
    methods: {
@@ -61,6 +77,9 @@
            this.scroll.refresh();
          }
        });
+       // 状态初始化，这样离开详情页再进去时不会保留之前对评价的设置
+       this.selectType = ALL;
+       this.onlyContent = true;
      },
      hide() {
        this.showFlag = false;
@@ -71,7 +90,8 @@
    },
    components: {
      cartcontrol,
-     split
+     split,
+     ratingselect
    }
  };
 </script>
