@@ -22,7 +22,11 @@
           </div>
           <div @click="addFirst(food)" class="buy" v-show="!food.count || food.count===0">加入购物车</div>
         </div>
-        <split></split>
+        <split v-show="food.info"></split>
+        <div class="info" v-show="food.info"><!--不是每个商品都有商品介绍-->
+          <h1 class="title">商品消息</h1>
+          <p class="text">{{food.info}}</p>
+        </div>
       </div>
     </div>
   </transition>
@@ -151,4 +155,17 @@
         border-radius: 12px
         color: #fff
         background: rgb(0, 160, 220)
+    .info
+      padding: 18px
+      .title
+        line-height: 14px
+        margin-bottom: 6px
+        font-size: 14px
+        color: rgb(7, 17, 27)
+      .text
+        line-height: 24px
+        padding: 0 8px
+        font-size: 12px
+        font-weight: 200
+        color: rgb(77, 85, 93)
 </style>
