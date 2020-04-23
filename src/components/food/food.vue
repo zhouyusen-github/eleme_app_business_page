@@ -17,11 +17,11 @@
           <div class="price">
             <span class="now_price">￥{{food.price}}</span><span class="old_price" v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
           </div>
+          <div class="cartcontrol-wrapper">
+            <cartcontrol :food="food"></cartcontrol>
+          </div>
+          <div @click="addFirst(food)" class="buy" v-show="!food.count || food.count===0">加入购物车</div>
         </div>
-        <div class="cartcontrol-wrapper">
-          <cartcontrol :food="food"></cartcontrol>
-        </div>
-        <div @click="addFirst(food)" class="buy" v-show="!food.count || food.count===0">加入购物车</div>
       </div>
     </div>
   </transition>
@@ -130,21 +130,21 @@
           text-decoration: line-through // 横线
           font-size: 10px
           color: rgb(147, 153, 159)
-    .cartcontrol-wrapper
-      position: absolute
-      right: 12px
-      bottom: 12px
-    .buy
-      position: absolute
-      right: 18px
-      bottom: 18px
-      z-index: 10
-      height: 24px
-      line-height: 24px
-      padding: 0 12px
-      box-sizing: border-box
-      font-size: 10px
-      border-radius: 12px
-      color: #fff
-      background: rgb(0, 160, 220)
+      .cartcontrol-wrapper
+        position: absolute
+        right: 12px
+        bottom: 12px
+      .buy
+        position: absolute
+        right: 18px
+        bottom: 18px
+        z-index: 10
+        height: 24px
+        line-height: 24px
+        padding: 0 12px
+        box-sizing: border-box
+        font-size: 10px
+        border-radius: 12px
+        color: #fff
+        background: rgb(0, 160, 220)
 </style>
