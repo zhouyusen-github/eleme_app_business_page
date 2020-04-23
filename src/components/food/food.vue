@@ -106,6 +106,7 @@
           color: #fff
     .content
       padding: 18px
+      position: relative // 不加这个子组件会相当于父父组件定位
       .title
         line-height: 14px
         margin-bottom: 8px
