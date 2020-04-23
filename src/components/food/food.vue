@@ -1,20 +1,22 @@
 <template>
   <transition name="move">
-    <div v-show="showFlag" class="food">
-      <div class="image-header">
-        <img :src="food.image">
-        <div class="back" @click="hide"><!--返回按钮-->
-          <i class="icon-arrow_lift"></i>
+    <div v-show="showFlag" class="food" ref="food2">
+      <div><!--better-scroll的规则是作用于dom的第一个子结构，所以套多一个div-->
+        <div class="image-header">
+          <img :src="food.image">
+          <div class="back" @click="hide"><!--返回按钮-->
+            <i class="icon-arrow_lift"></i>
+          </div>
         </div>
-      </div>
-      <div class="content">
-        <h1 class="title">{{food.name}}</h1>
-        <div class="detail">
-          <span class="sell-count">月售{{food.sellCount}}份</span>
-          <span class="rating">好评率{{food.rating}}%</span>
-        </div>
-        <div class="price">
-          <span class="now_price">￥{{food.price}}</span><span class="old_price" v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
+        <div class="content">
+          <h1 class="title">{{food.name}}</h1>
+          <div class="detail">
+            <span class="sell-count">月售{{food.sellCount}}份</span>
+            <span class="rating">好评率{{food.rating}}%</span>
+          </div>
+          <div class="price">
+            <span class="now_price">￥{{food.price}}</span><span class="old_price" v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
+          </div>
         </div>
       </div>
     </div>
@@ -22,7 +24,8 @@
 </template>
 
 <script type="text/ecmascript-6">
- export default {
+  import BScroll from 'better-scroll';
+  export default {
    props: { // goods.vue传入这个值
      food: {
        type: Object
@@ -36,6 +39,15 @@
    methods: {
      show() {
        this.showFlag = true;
+       this.$nextTick(() => {
+         if (!this.scroll) {
+           this.scroll = new BScroll(this.$refs.food2, {
+             click: true
+           });
+         } else {
+           this.scroll.refresh();
+         }
+       });
      },
      hide() {
        this.showFlag = false;
@@ -70,7 +82,7 @@
       .back
         position: absolute
         top: 10px
-        left: 0px
+        left: 0
         .icon-arrow_lift
           display: block
           padding: 10px // 让点击区域变大好点一点
