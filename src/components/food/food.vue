@@ -30,7 +30,7 @@
         <split></split>
         <div class="rating">
           <h1 class="title">商品评价</h1>
-          <ratingselect :selectType="selectType" :onlyContent="onlyContent" :desc="desc" :ratings="food.ratings"></ratingselect>
+          <ratingselect :control="control" :desc="desc" :ratings="food.ratings"></ratingselect>
           <div class="rating-wrapper"><!--评论区-->
             <ul v-show="food.ratings && food.ratings.length">
               <li v-show="needShow(rating.rateType,rating.text)" v-for="rating in food.ratings" class="rating-item"><!--needShow函数直接受评价类型和是否有内容影响-->
@@ -74,8 +74,10 @@
      return {
        showFlag: false,
        // 需要传给ratingselect组件的数据
-       selectType: ALL,
-       onlyContent: false,
+       control: {
+         selectType: ALL,
+         onlyContent: false
+       },
        desc: {
          all: '全部',
          positive: '推荐',
@@ -96,8 +98,8 @@
          }
        });
        // 状态初始化，这样离开详情页再进去时不会保留之前对评价的设置
-       this.selectType = ALL;
-       this.onlyContent = false;
+       this.control.selectType = ALL;
+       this.control.onlyContent = false;
      },
      hide() {
        this.showFlag = false;
@@ -106,13 +108,13 @@
        Vue.set(this.food, 'count', 1); // 第一次可能是没有的，这一点和cartcontrol一样
      },
      needShow(type, text) {
-       if (this.onlyContent && !text) {
+       if (this.control.onlyContent && !text) {
          return false;
        }
-       if (this.selectType === ALL) {
+       if (this.control.selectType === ALL) {
          return true;
        } else {
-         return type === this.selectType;
+         return type === this.control.selectType;
        }
      }
    },

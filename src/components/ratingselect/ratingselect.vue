@@ -1,11 +1,11 @@
 <template>
   <div class="ratingselect">
     <div class="rating-type border-1px"><!--选择类型的名字-->
-      <span @click="select(2)" class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">{{ratings.length}}</span></span><!--block是统一有的样式--><!--selectType用于确定谁被选中-->
-      <span @click="select(0)" class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">{{positive_ratings.length}}</span></span>
-      <span @click="select(1)" class="block negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">{{negative_ratings.length}}</span></span>
+      <span @click="select(2)" class="block positive" :class="{'active':control.selectType===2}">{{desc.all}}<span class="count">{{ratings.length}}</span></span><!--block是统一有的样式--><!--selectType用于确定谁被选中-->
+      <span @click="select(0)" class="block positive" :class="{'active':control.selectType===0}">{{desc.positive}}<span class="count">{{positive_ratings.length}}</span></span>
+      <span @click="select(1)" class="block negative" :class="{'active':control.selectType===1}">{{desc.negative}}<span class="count">{{negative_ratings.length}}</span></span>
     </div>
-    <div @click="content()" class="switch" :class="{'on':onlyContent}"><!--选择是否只看内容的评价-->
+    <div @click="content()" class="switch" :class="{'on':control.onlyContent}"><!--选择是否只看内容的评价-->
       <span class="icon-check_circle"></span><!--打勾按钮-->
       <span class="text">只看内容的评价</span>
     </div>
@@ -25,13 +25,14 @@
           return [];
         }
       },
-      selectType: { // 选择类型
-        type: Number,
-        default: ALL
-      },
-      onlyContent: { // 是否只看有内容的评价
-        type: Boolean,
-        default: false
+      control: {
+        type: Object,
+        default() {
+          return {
+            selectType: ALL,
+            onlyContent: false
+          };
+        }
       },
       desc: {
         type: Object,
@@ -58,10 +59,10 @@
     },
     methods: {
       select(type) {
-        this.selectType = type;
+        this.control.selectType = type;
       },
       content() {
-        this.onlyContent = !this.onlyContent;
+        this.control.onlyContent = !this.control.onlyContent;
       }
     }
   };
