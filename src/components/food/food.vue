@@ -188,4 +188,11 @@
         font-size: 12px
         font-weight: 200
         color: rgb(77, 85, 93)
+    .rating
+      padding-top: 18px // 和上面info的不同是因为，ratingselect是在rating内，ratingselect的占手机的样式宽度是由其自己处理,所以这里不控制宽度
+      .title
+        line-height: 14px
+        margin-left: 6px
+        font-size: 14px
+        color: rgb(7, 17, 27)
 </style>
