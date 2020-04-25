@@ -45,7 +45,7 @@
                 </p>
               </li>
             </ul>
-            <div class="no-rating" v-show="!food.ratings || !food.ratings.length"></div><!--这个是负责在没有评论数据时显示的-->
+            <div class="no-rating" v-show="!food.ratings || !food.ratings.length">暂无评价</div><!--这个是负责在没有评论数据时显示的-->
           </div>
         </div>
       </div>
@@ -263,4 +263,8 @@
               color: rgb(0, 160, 220)
             .icon-thumb_down
               color: rgb(147, 153, 159)
+        .no-rating
+          padding: 16px 0
+          font-size: 12px
+          color: rgb(147, 153, 159)
 </style>
