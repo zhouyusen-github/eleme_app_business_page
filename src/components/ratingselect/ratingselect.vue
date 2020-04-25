@@ -1,12 +1,12 @@
 <template>
   <div class="ratingselect">
     <div class="rating-type border-1px"><!--选择类型的名字-->
-      <span class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">47</span></span><!--block是统一有的样式-->
+      <span class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">47</span></span><!--block是统一有的样式--><!--selectType用于确定谁被选中-->
       <span class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">40</span></span>
       <span class="block negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">7</span></span>
     </div>
-    <div class="switch"><!--选择是否只看内容的评价-->
-      <span class=".icon-check_circle"></span>
+    <div class="switch" :class="{'on':onlyContent}"><!--选择是否只看内容的评价-->
+      <span class="icon-check_circle"></span><!--打勾按钮-->
       <span class="text">只看内容的评价</span>
     </div>
   </div>
@@ -76,4 +76,21 @@
           background: rgba(77, 85, 93, 0.2)
           &.active // 被选中时的样式
             background: rgb(77, 85, 93)
+    .switch
+      padding: 12px 8px
+      line-height: 24px
+      border-bottom: 1px solid rgba(7, 17 ,27, 0.1)
+      color: rgb(147, 153, 159)
+      .icon-check_circle
+        display: inline-block
+        vertical-align: top // 把元素的顶端与行中最高元素的顶端对齐
+        margin-right: 4px
+        font-size: 24px
+      .text
+        display: inline-block
+        vertical-align: top
+        font-size: 12px
+      &.on
+        .icon-check_circle
+          color: #00c850
 </style>
