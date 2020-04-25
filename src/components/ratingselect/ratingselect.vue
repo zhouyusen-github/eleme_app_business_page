@@ -1,9 +1,9 @@
 <template>
   <div class="ratingselect">
     <div class="rating-type border-1px"><!--选择类型的名字-->
-      <span @click="select(2)" class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">47</span></span><!--block是统一有的样式--><!--selectType用于确定谁被选中-->
-      <span @click="select(0)" class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">40</span></span>
-      <span @click="select(1)" class="block negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">7</span></span>
+      <span @click="select(2)" class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">{{ratings.length}}</span></span><!--block是统一有的样式--><!--selectType用于确定谁被选中-->
+      <span @click="select(0)" class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">{{positive_ratings.length}}</span></span>
+      <span @click="select(1)" class="block negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">{{negative_ratings.length}}</span></span>
     </div>
     <div @click="content()" class="switch" :class="{'on':onlyContent}"><!--选择是否只看内容的评价-->
       <span class="icon-check_circle"></span><!--打勾按钮-->
@@ -14,8 +14,8 @@
 
 <script type="text/ecmascript-6">
   // 选择类型在意思上有三种全选，正面的，反面的
-  // const POSITIVE = 0;
-  // const NEGATIVE = 1;
+  const POSITIVE = 0;
+  const NEGATIVE = 1;
   const ALL = 2;
   export default {
     props: {
@@ -42,6 +42,18 @@
             negative: '不满意'
           };
         }
+      }
+    },
+    computed: {
+      positive_ratings() {
+        return this.ratings.filter((rating) => { // filter是一个过滤函数
+          return rating.rateType === POSITIVE; // 过滤出所有积极评论
+        });
+      },
+      negative_ratings() {
+        return this.ratings.filter((rating) => { // filter是一个过滤函数
+          return rating.rateType === NEGATIVE; // 过滤出所有积极评论
+        });
       }
     },
     methods: {
