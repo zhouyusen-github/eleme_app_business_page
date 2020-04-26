@@ -3,11 +3,15 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import star from 'components/star/star';
   export default {
     props: {
       seller: {
         type: Object
       }
+    },
+    components: {
+      star
     }
   };
 </script>
@@ -44,5 +48,35 @@
           color: rgb(147, 153, 159)
       .overview-right
         flex: 1
-        padding-left: 24px
+        padding: 6px 0 6px 24px
+        .score-wrapper
+          margin-bottom: 8px
+          font-size: 0
+          .title
+            display: inline-block
+            line-height: 12px
+            vertical-align: top
+            font-size: 12px
+            color: rgb(7, 17, 27)
+          .star
+            display: inline-block
+            line-height: 12px
+            margin: 0 12px
+            vertical-align: top
+          .score
+            display: inline-block
+            line-height: 12px
+            vertical-align: top
+            font-size: 12px
+            color: rgb(255, 153, 27)
+        .delivery-wrapper
+          font-size: 0
+          .title // 这里title和delivery都是span所以不用inline-block会自动同步高低
+            line-height: 12px
+            font-size: 12px
+            color: rgb(7, 17, 27)
+          .delivery
+            margin-left: 12px
+            font-size: 12px
+            color: rgb(147, 153, 159)
 </style>
