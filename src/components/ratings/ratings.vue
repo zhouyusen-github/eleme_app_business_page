@@ -3,6 +3,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import BScroll from 'better-scroll';
   import star from 'components/star/star';
   import cartcontrol from 'components/cartcontrol/cartcontrol';
   import split from 'components/split/split';
@@ -41,6 +42,15 @@
         }
       }, response => {
         // error callback
+      });
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.ratings, {
+            click: true
+          });
+        } else {
+          this.scroll.refresh();
+        }
       });
     },
     methods: {
