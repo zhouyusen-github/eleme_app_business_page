@@ -81,6 +81,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import '../common/stylus/mixin';
   .ratings // 留出上面栏的空间
     position: absolute
     top: 174px
@@ -150,4 +151,62 @@
             margin-left: 12px
             font-size: 12px
             color: rgb(147, 153, 159)
+    .rating-wrapper
+      padding: 0 18px
+      .rating-item
+        display: flex
+        padding: 18px 0
+        border-1px(rgba(7, 17, 27, 0.1))
+        .avatar
+          flex: 0 0 28px
+          margin-right: 12px
+          img
+            height: auto
+            border-radius: 50%
+        .content
+          position: relative
+          flex: 1 // 当时缺了这个导致 使用默认值flex 的默认值是 0 1 auto
+          .name
+            font-size: 10px
+            color: rgb(7, 17, 27)
+            line-height: 12px
+            margin-bottom: 4px
+          .star-wrapper
+            margin-bottom: 6px
+            display: flex
+            align-items: center // 弹性盒子元素在该行的侧轴（纵轴）上居中放置
+            .star
+              margin-right: 6px
+            .delivery
+              font-size: 10px
+              color: rgb(147, 153, 159)
+          .text
+            font-size: 12px
+            color: rgb(7, 17, 27)
+            line-height: 18px
+            margin-bottom: 8px
+          .recommand
+            display: flex
+            align-items: center
+            flex-wrap: wrap // 规定灵活的项目在必要的时候拆行或拆列。
+            line-height: 16px
+            .icon-thumb_up, .item
+              margin: 0 8px 4px 0
+              font-size: 9px
+            .icon-thumb_up
+              color: rgb(0, 160, 220)
+            .item
+              padding: 0 6px
+              border: 1px solid rgba(7, 17, 27, 0.1)
+              border-radius: 1px
+              color: rgb(147, 153, 159)
+              background-color: rgb(255, 255, 255)
+        .time
+          position: absolute
+          right: 0
+          top: 0
+          line-height: 12px
+          font-size: 10px
+          font-weight: 200
+          color: rgb(147, 153, 159)
 </style>
