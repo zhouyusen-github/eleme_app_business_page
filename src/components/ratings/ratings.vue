@@ -4,14 +4,49 @@
 
 <script type="text/ecmascript-6">
   import star from 'components/star/star';
+  import cartcontrol from 'components/cartcontrol/cartcontrol';
+  import split from 'components/split/split';
+  import ratingselect from 'components/ratingselect/ratingselect';
+
+  const ALL = 2;
+  const ERR_OK = 0;
   export default {
     props: {
       seller: {
         type: Object
       }
     },
+    data() {
+      return {
+        ratings: [],
+        // 需要传给ratingselect组件的数据
+        control: {
+          selectType: ALL,
+          onlyContent: false
+        },
+        desc: {
+          all: '全部',
+          positive: '满意',
+          negative: '不满意'
+        }
+      };
+    },
+    created() {
+      this.$http.get('/api/ratings').then(response => { // 和App.vue一样访问接口获取数据
+        response = response.body;
+        console.log(response);
+        if (response.errno === ERR_OK) {
+          this.ratings = response.data;
+        }
+      }, response => {
+        // error callback
+      });
+    },
     components: {
-      star
+      star,
+      cartcontrol,
+      split,
+      ratingselect
     }
   };
 </script>
