@@ -7,6 +7,7 @@
   import cartcontrol from 'components/cartcontrol/cartcontrol';
   import split from 'components/split/split';
   import ratingselect from 'components/ratingselect/ratingselect';
+  import {formatDate} from 'components/common/js/date';
 
   const ALL = 2;
   const ERR_OK = 0;
@@ -41,6 +42,24 @@
       }, response => {
         // error callback
       });
+    },
+    methods: {
+      needShow(type, text) {
+        if (this.control.onlyContent && !text) {
+          return false;
+        }
+        if (this.control.selectType === ALL) {
+          return true;
+        } else {
+          return type === this.control.selectType;
+        }
+      }
+    },
+    filters: {
+      formatDate(time) {
+        let date = new Date(time);
+        return formatDate(date, 'yyyy-MM-dd hh:mm');
+      }
     },
     components: {
       star,
