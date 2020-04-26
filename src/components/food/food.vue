@@ -38,7 +38,7 @@
                   <span class="name">{{rating.username}}</span><!--右侧用户名-->
                   <img class="avater" width="12" height="12" :src="rating.avatar"><!--右侧用户图片-->
                 </div>
-                <div class="time">{{rating.rateTime}}</div>
+                <div class="time">{{rating.rateTime | formatDate}}</div><!--vue的filter-->
                 <p class="text">
                   <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}"></span><!--向上向下大拇指图标-->
                   {{rating.text}}
@@ -59,7 +59,7 @@
   import split from 'components/split/split';
   import ratingselect from 'components/ratingselect/ratingselect';
   import Vue from 'vue';
-
+  import {formatDate} from 'components/common/js/date'; // 用大括号是因为export的是一个方法
   // const POSITIVE = 0;
   // const NEGATIVE = 1;
   const ALL = 2;
@@ -116,6 +116,12 @@
        } else {
          return type === this.control.selectType;
        }
+     }
+   },
+   filters: {
+     formatDate(time) {
+       let date = new Date(time);
+       return formatDate(date, 'yyyy-MM-dd hh:mm');
      }
    },
    components: {
