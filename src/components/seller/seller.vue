@@ -46,6 +46,16 @@
         </ul>
       </div>
       <split></split>
+      <div class="shopPicture">
+        <h1 class="title">公告与活动</h1>
+        <div class="pictures-wrapper" ref="picturesWrapper">
+          <ul class="picture-list" ref="pictureList">
+            <li v-for="picture in seller.pics" class="picture">
+              <img width="120px" height="90px" :src="picture">
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -63,12 +73,29 @@
     },
     created() {
       this.$nextTick(() => {
-        if (!this.scroll) {
-          this.scroll = new BScroll(this.$refs.seller, {
+        if (!this.sellerScroll) {
+          this.sellerScroll = new BScroll(this.$refs.seller, {
             click: true
           });
         } else {
-          this.scroll.refresh();
+          this.sellerScroll.refresh();
+        }
+      });
+      this.$nextTick(() => {
+        if (this.seller.pics) { // 计算pictureList的dom应有宽度，并修改
+          let picWidth = 120;
+          let margin = 6;
+          let width = (picWidth + margin) * this.seller.pics.length - margin;
+          console.log(width);
+          this.$refs.pictureList.style.width = width + 'px'; // 横向滚动需要手动设置内部子元素宽度，这样才会滚动，因为不设置是自动不会超出父组件宽度的，自然也不会滚动
+        }
+        if (!this.picturesWrapperScroll) {
+          this.picturesWrapperScroll = new BScroll(this.$refs.picturesWrapper, {
+            scrollX: true,
+            click: true
+          });
+        } else {
+          this.picturesWrapperScroll.refresh();
         }
       });
     },
@@ -160,4 +187,25 @@
             font-weight: 200
             color: rgb(7, 17, 27)
             line-height: 16px
+    .shopPicture
+      position: relative
+      padding: 18px
+      .title
+        margin-bottom: 8px
+        line-height: 14px
+        color: rgb(7, 17, 27)
+        font-size: 14px
+      .pictures-wrapper
+        width: 100%
+        overflow: hidden // 超出范围隐藏
+        white-space: nowrap // 不折行
+        .picture-list
+          font-size: 0
+          .picture
+            display: inline-block
+            margin-right: 6px
+            width: 120px
+            height: 90px
+            &:last-child
+              margin: 0
 </style>
