@@ -1,5 +1,5 @@
 <template>
-  <div class="seller">
+  <div class="seller" ref="seller">
     <div class="seller-content">
       <div class="overview">
         <h1 class="title">{{seller.name}}</h1>
@@ -33,6 +33,19 @@
         </ul>
       </div>
       <split></split>
+      <div class="bulletin">
+        <h1 class="title">公告与活动</h1>
+        <div class="content-wrapper">
+          <p class="content">{{seller.bulletin}}</p>
+        </div>
+        <ul v-if="seller.supports" class="supports">
+          <li class="support-item" v-for="item in seller.supports">
+            <supportIco :size=4 :type="item.type"></supportIco>
+            <span class="text">{{item.description}}</span>
+          </li>
+        </ul>
+      </div>
+      <split></split>
     </div>
   </div>
 </template>
@@ -40,15 +53,29 @@
 <script type="text/ecmascript-6">
   import star from 'components/star/star';
   import split from 'components/split/split';
+  import supportIco from 'components/support-ico/support-ico';
+  import BScroll from 'better-scroll';
   export default {
     props: {
       seller: { // 这个是在router-view中就发送了
         type: Object
       }
     },
+    created() {
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new BScroll(this.$refs.seller, {
+            click: true
+          });
+        } else {
+          this.scroll.refresh();
+        }
+      });
+    },
     components: {
       star,
-      split
+      split,
+      supportIco
     }
   };
 </script>
@@ -103,4 +130,34 @@
             line-height: 24px
             .stress
               font-size: 24px
+    .bulletin
+      position: relative
+      padding: 18px 18px 0 18px
+      .title
+        margin-bottom: 8px
+        line-height: 14px
+        color: rgb(7, 17, 27)
+        font-size: 14px
+      .content-wrapper
+        padding: 0 12px 12px 16px
+        .content
+          font-size: 12px
+          font-weight: 200
+          color: rgb(240, 20, 20)
+          line-height: 24px
+      .supports
+        .support-item
+          padding: 16px 12px
+          border-top: 1px solid rgba(7, 17, 27, 0.1)
+          .support-ico
+            display: inline-block
+            vertical-align: top
+            margin-right: 6px
+          .text
+            display: inline-block
+            vertical-align: top
+            font-size: 12px
+            font-weight: 200
+            color: rgb(7, 17, 27)
+            line-height: 16px
 </style>
