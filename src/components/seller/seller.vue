@@ -31,6 +31,10 @@
             </div>
           </li>
         </ul>
+        <div class="favorite" @click="toggleFavorite()">
+          <span class="icon-favorite" :class="{'active':favorite}"></span>
+          <span class="text">{{favoriteText}}</span><!--是否收藏值不同-->
+        </div>
       </div>
       <split></split>
       <div class="bulletin">
@@ -78,6 +82,21 @@
     props: {
       seller: { // 这个是在router-view中就发送了
         type: Object
+      }
+    },
+    data() {
+      return {
+        favorite: false
+      };
+    },
+    computed: {
+      favoriteText() {
+        return this.favorite ? '已收藏' : '收藏';
+      }
+    },
+    methods: {
+      toggleFavorite() {
+        this.favorite = !this.favorite;
       }
     },
     created() {
@@ -166,6 +185,25 @@
             line-height: 24px
             .stress
               font-size: 24px
+      .favorite
+        position: absolute
+        right: 18px
+        top: 18px
+        text-align: center
+        width: 50px // 设置这个后，就不会因字的变化导致图标移动
+        right: 5px
+        .icon-favorite
+          display: block
+          color: #d4d6d9
+          font-size: 24px
+          line-height: 24px
+          margin-bottom: 4px
+          &.active
+            color: rgb(240, 20, 20)
+        .text
+          line-height: 10px
+          font-size: 10px
+          color: rgb(7, 17, 27)
     .bulletin
       position: relative
       padding: 18px 18px 0 18px
