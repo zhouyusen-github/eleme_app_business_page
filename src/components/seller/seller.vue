@@ -78,6 +78,7 @@
   import split from 'components/split/split';
   import supportIco from 'components/support-ico/support-ico';
   import BScroll from 'better-scroll';
+  import { saveToLocal, loadFromLocal } from 'components/common/js/store';
   export default {
     props: {
       seller: { // 这个是在router-view中就发送了
@@ -86,7 +87,9 @@
     },
     data() {
       return {
-        favorite: false
+        favorite: (() => {
+          return loadFromLocal(this.seller.id, 'favorite', false);
+        })()
       };
     },
     computed: {
@@ -97,6 +100,7 @@
     methods: {
       toggleFavorite() {
         this.favorite = !this.favorite;
+        saveToLocal(this.seller.id, 'favorite', this.favorite);
       }
     },
     created() {
