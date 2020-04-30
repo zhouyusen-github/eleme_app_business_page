@@ -85,7 +85,7 @@
       };
     },
     created() {
-      this.$http.get('/api/ratings').then(response => { // 和App.vue一样访问接口获取数据
+      this.$http.get('/static/ratings.json').then(response => { // 和App.vue一样访问接口获取数据
         response = response.body;
         console.log(response);
         if (response.errno === ERR_OK) {

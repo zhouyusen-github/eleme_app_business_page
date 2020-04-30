@@ -88,7 +88,7 @@
       }
     },
     created() { // 访问goods数据接口获取goods数据(同App.vue中访问seller接口获取数据的格式，不在App.vue就获取该数据的原因是，需要数据时再访问相关接口)
-      this.$http.get('/api/goods').then(response => {
+      this.$http.get('/static/goods.json').then(response => {
         // get data
         response = response.body;
         if (response.errno === ERR_OK) {
