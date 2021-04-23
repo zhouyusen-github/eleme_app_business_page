@@ -8,7 +8,7 @@ import goods from './components/goods/goods';
 import ratings from './components/ratings/ratings';
 import seller from './components/seller/seller';
 import VueI18n from 'vue-i18n';
-import messages from './lang';
+import messages from './lang'; // 引入中英文文本
 
 import 'common/stylus/index.styl';
 
@@ -27,6 +27,7 @@ const router = new VueRouter({
   routes: routes
 });
 
+// 根据浏览器设置语言
 let lang = navigator.language;
 if (lang === 'zh' || lang === 'zh-CN') {
   localStorage.setItem('lang', 'cn');
@@ -34,15 +35,16 @@ if (lang === 'zh' || lang === 'zh-CN') {
   localStorage.setItem('lang', 'en');
 }
 
+// 启动i18n
 const i18n = new VueI18n({
-  locale: lang,
+  locale: lang, // 设置语言
   messages
 });
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  i18n,
+  i18n, // 启动i18n
   router,
   components: { App },
   template: '<App/>'
