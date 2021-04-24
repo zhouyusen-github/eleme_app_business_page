@@ -11,25 +11,25 @@
         <div class="content">
           <h1 class="title">{{food.name}}</h1>
           <div class="detail">
-            <span class="sell-count">月售{{food.sellCount}}份</span>
-            <span class="rating">好评率{{food.rating}}%</span>
+            <span class="sell-count">{{ $t("food.monthlySale") }}{{food.sellCount}}{{ $t("Unit.fen") }}</span>
+            <span class="rating">{{ $t("food.foodRating") }}{{food.rating}}%</span>
           </div>
           <div class="price">
-            <span class="now_price">￥{{food.price}}</span><span class="old_price" v-show="food.oldPrice">￥{{food.oldPrice}}</span><!--原价这个属性不一定有-->
+            <span class="now_price">{{ $t("moneyNotation") }}{{food.price}}</span><span class="old_price" v-show="food.oldPrice">{{ $t("Unit.moneyNotation") }}{{food.oldPrice}}</span><!--原价这个属性不一定有-->
           </div>
           <div class="cartcontrol-wrapper">
             <cartcontrol :food="food"></cartcontrol>
           </div>
-          <div @click="addFirst(food)" class="buy" v-show="!food.count || food.count===0">加入购物车</div>
+          <div @click="addFirst(food)" class="buy" v-show="!food.count || food.count===0">{{ $t("food.addToCart") }}</div>
         </div>
         <split v-show="food.info"></split>
         <div class="info" v-show="food.info"><!--不是每个商品都有商品介绍-->
-          <h1 class="title">商品消息</h1>
+          <h1 class="title">{{ $t("food.foodInformation") }}</h1>
           <p class="text">{{food.info}}</p>
         </div>
         <split></split>
         <div class="rating">
-          <h1 class="title">商品评价</h1>
+          <h1 class="title">{{ $t("food.foodReviews") }}</h1>
           <ratingselect :control="control" :desc="desc" :ratings="food.ratings"></ratingselect>
           <div class="rating-wrapper"><!--评论区-->
             <ul v-show="food.ratings && food.ratings.length">
@@ -45,7 +45,7 @@
                 </p>
               </li>
             </ul>
-            <div class="no-rating" v-show="!food.ratings || !food.ratings.length">暂无评价</div><!--这个是负责在没有评论数据时显示的-->
+            <div class="no-rating" v-show="!food.ratings || !food.ratings.length">{{ $t("Common.NoCommentsYet") }}</div><!--这个是负责在没有评论数据时显示的-->
           </div>
         </div>
       </div>

@@ -6,39 +6,40 @@
         <div class="description border-1px">
           <star :size="36" :score="seller.score"></star>
           <span class="text">({{seller.ratingCount}})</span>
-          <span class="text">月售{{seller.sellCount}}单</span>
+          <span class="text">{{ $t("seller.monthlySale") }}{{seller.sellCount}}</span>
         </div>
         <ul class="remark">
           <li class="block">
-            <h2>起送价</h2>
+            <h2>{{ $t("minimumConsumption") }}</h2>
             <div class="content">
               <span class="stress">{{seller.minPrice}}</span>
-              元
+              {{ $t("dollar") }}
             </div>
           </li>
           <li class="block">
-            <h2>商家配送</h2>
+            <h2>{{ $t("deliveryFee") }}</h2>
             <div class="content">
               <span class="stress">{{seller.deliveryPrice}}</span>
-              元
+              {{ $t("dollar") }}
             </div>
           </li>
           <li class="block">
-            <h2>平均配送时间</h2>
+            <h2>{{ $t("seller.averageDeliveryTime") }}</h2>
             <div class="content">
               <span class="stress">{{seller.deliveryTime}}</span>
-              元
+              {{ $t("Unit.minute") }}
             </div>
           </li>
         </ul>
         <div class="favorite" @click="toggleFavorite()">
           <span class="icon-favorite" :class="{'active':favorite}"></span>
-          <span class="text">{{favoriteText}}</span><!--是否收藏值不同-->
+          <span class="text" v-if=favoriteText>{{ $t("seller.saved") }}</span><!--是否收藏值不同-->
+          <span class="text" v-else>{{ $t("seller.unsaved") }}</span>
         </div>
       </div>
       <split></split>
       <div class="bulletin">
-        <h1 class="title">公告与活动</h1>
+        <h1 class="title">{{ $t("seller.announcementsAndEvents") }}</h1>
         <div class="content-wrapper">
           <p class="content">{{seller.bulletin}}</p>
         </div>
@@ -51,7 +52,7 @@
       </div>
       <split></split>
       <div class="shopPicture">
-        <h1 class="title">公告与活动</h1>
+        <h1 class="title">{{ $t("seller.restaurantPicture") }}</h1>
         <div class="pictures-wrapper" ref="picturesWrapper">
           <ul class="picture-list" ref="pictureList">
             <li v-for="picture in seller.pics" class="picture">
@@ -62,7 +63,7 @@
       </div>
       <split></split>
       <div class="infomation">
-        <h1 class="title">商家信息</h1>
+        <h1 class="title">{{ $t("seller.restaurantInformation") }}</h1>
         <ul v-if="seller.infos" class="infos">
           <li class="infos-item" v-for="item in seller.infos">
             <span class="text">{{item}}</span>
@@ -94,7 +95,7 @@
     },
     computed: {
       favoriteText() {
-        return this.favorite ? '已收藏' : '收藏';
+        return this.favorite;
       }
     },
     methods: {

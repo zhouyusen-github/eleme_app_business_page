@@ -23,8 +23,8 @@
                 <h2 class="name">{{food.name}}</h2>
                 <p class="description">{{food.description}}</p>
                 <div class="extra">
-                  <span class="count">月售{{food.sellCount}}份</span>
-                  <span>好评率{{food.rating}}%</span>
+                  <span class="count">{{ $t("food.monthlySale") }}{{food.sellCount}} {{ $t("Unit.fen") }}</span>
+                  <span>{{ $t("food.foodRating") }}{{food.rating}}%</span>
                 </div>
                 <div class="price">
                   <span class="now_price">￥{{food.price}}</span>

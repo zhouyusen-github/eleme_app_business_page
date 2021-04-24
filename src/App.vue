@@ -6,13 +6,13 @@
         <!-- 使用 router-link 组件来导航. -->
         <!-- 通过传入 `to` 属性指定链接. -->
         <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
-        <router-link to="/goods">{{ $t("user.login") }}</router-link>
+        <router-link to="/goods">{{ $t("App.goods") }}</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="/ratings">评论</router-link>
+        <router-link to="/ratings">{{ $t("App.ratings") }}</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="/seller">商家</router-link>
+        <router-link to="/seller">{{ $t("App.seller") }}</router-link>
       </div>
     </div>
     <!-- 路由出口 -->

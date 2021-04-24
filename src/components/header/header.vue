@@ -11,7 +11,7 @@
           <span class = "name">{{seller.name}}</span><!--店名-->
         </div>
         <div class="description"><!--外卖方式描述-->
-          {{seller.description}}/{{seller.deliveryTime}}分钟送达
+          {{seller.description}}/{{ $t("seller.averageDeliveryTime") }}{{seller.deliveryTime}}{{ $t("Unit.minute") }}
         </div>
         <div v-if="seller.supports" class="support"><!--加v-if，因为seller初始化是空{}，那么seller.supports是undefined，undefined没有[0]会报错-->
           <span class = "icon" :class="classMap[seller.supports[0].type]"></span><!--动态class，随接口返回变动-->
@@ -19,7 +19,7 @@
         </div>
       </div><!--标题-->
       <div v-if="seller.supports" class="support-count" @click="showDetail"><!--右下角的“5个”即商标支持-->
-        <span class="count">{{seller.supports.length}}个</span>
+        <span class="count">{{seller.supports.length}}{{ $t("Unit.ge") }}</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div><!--内容区-->
@@ -40,7 +40,7 @@
           </div>
           <div class="title"><!--小标题-->
             <div class="line"></div>
-            <div class="text">优惠信息</div>
+            <div class="text">{{ $t("header.discountInformation") }}</div>
             <div class="line"></div>
           </div>
           <ul v-if="seller.supports" class="supports"><!--商家支持，而且不一定有，所以v-if-->
@@ -51,7 +51,7 @@
           </ul>
           <div class="title"><!--和上面优惠信息一样-->
             <div class="line"></div>
-            <div class="text">商家公告</div>
+            <div class="text">{{ $t("header.restaurantAnnouncement") }}</div>
             <div class="line"></div>
           </div>
           <div class="bulletin">
@@ -219,7 +219,7 @@
       height: 100%
       overflow: auto
       background: rgba(7, 17, 27, 0.8)
-      transition: all 3.5s // 过渡效果
+      transition: all 0.5s // 过渡效果
       backdrop-filter: blur(10px)  // 背景毛玻璃效果
       &.fade-enter, &.fade-leave-to // 出现时的第一帧，消失时的最后一帧，应用的样式
         opacity: 0 // 透明度设置为0

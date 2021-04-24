@@ -4,23 +4,23 @@
       <div class="overview">
         <div class="overview-left">
           <h1 class="score">{{seller.score}}</h1>
-          <div class="title">综合评分</div>
-          <div class="rank">高于周边商家{{seller.rankRate}}%</div>
+          <div class="title">{{ $t("ratings.score") }}</div>
+          <div class="rank">{{ $t("ratings.rankRate") }}{{seller.rankRate}}%</div>
         </div>
         <div class="overview-right">
           <div class="score-wrapper">
-            <span class="title">服务态度</span>
+            <span class="title">{{ $t("ratings.serviceScore") }}</span>
             <star :size="36" :score="seller.serviceScore"></star>
             <span class="score">{{seller.serviceScore}}</span>
           </div>
           <div class="score-wrapper">
-            <span class="title">商品评分</span>
+            <span class="title">{{ $t("ratings.foodScore") }}</span>
             <star :size="36" :score="seller.foodScore"></star>
             <span class="score">{{seller.foodScore}}</span>
           </div>
           <div class="delivery-wrapper">
-            <span class="title">送达时间</span>
-            <span class="delivery">{{seller.deliveryTime}}分钟</span>
+            <span class="title">{{ $t("ratings.deliveryTime") }}</span>
+            <span class="delivery">{{seller.deliveryTime}}{{ $t("Unit.minute") }}</span>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
               <h1 class="name">{{rating.username}}</h1>
               <div class="star-wrapper">
                 <star :size="24" :score="rating.score"></star>
-                <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}分钟送达</span>
+                <span class="delivery" v-show="rating.deliveryTime">{{ $t("ratings.deliveryTime") }}{{rating.deliveryTime}}{{ $t("Unit.minute") }}</span>
               </div>
               <p class="text">{{rating.text}}</p>
               <div class="recommand" v-show="rating.recommend.length">
@@ -47,7 +47,7 @@
             </div>
           </li>
         </ul>
-        <div class="no-rating" v-show="!ratings.length">暂无评价</div><!--这个是负责在没有评论数据时显示的-->
+        <div class="no-rating" v-show="!ratings.length">{{ $t("Common.NoCommentsYet") }}</div><!--这个是负责在没有评论数据时显示的-->
       </div>
     </div>
   </div>

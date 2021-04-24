@@ -44,7 +44,7 @@
       .cart-decrease
         display: inline-block // 三个东西都是同行排列自然用inline-block
         padding: 6px // 增加点击区域
-        transition: all 1.5s // 过渡效果
+        transition: all 0.5s // 过渡效果
         &.move-enter, &.move-leave-to // 出现时的第一帧，消失时的最后一帧，应用的样式
           opacity: 0 // 透明度设置为0
           transform: translate3D(24px,0,0) // Transform属性应用于元素的2D或3D转换。这个属性允许你将元素旋转，缩放，移动，倾斜,translate3d(x,y,z),z轴是z-index的z
@@ -55,7 +55,7 @@
           line-height: 24px
           font-size: 24px
           color: rgb(0,160,220)
-          transition: all 1.5s linear
+          transition: all 0.5s linear
       .cart-count
         display: inline-block
         vertical-align: top

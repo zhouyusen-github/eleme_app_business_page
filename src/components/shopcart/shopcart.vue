@@ -9,7 +9,7 @@
           <div class="num" v-show="totalCount>0">{{totalCount}}</div><!--没购买商品不显示-->
         </div>
         <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
-        <div class="description">另需配送费￥{{deliveryPrice}}元</div>
+        <div class="description">{{ $t("deliveryFee") }}{{ $t("moneyNotation") }}{{deliveryPrice}}{{ $t("dollar") }}</div>
       </div>
       <div class="content-right">
         <div class="pay" :class="payClass">
@@ -20,8 +20,8 @@
     <transition name="shopcartList">
       <div class="shopcart-list" v-show="listShow()"><!--购物车详情栏-->
         <div class="list-header">
-          <h1 class="title">购物车</h1>
-          <span class="empty" @click="emptySelectFoods()">清空</span>
+          <h1 class="title">{{ $t("shopCart") }}</h1>
+          <span class="empty" @click="emptySelectFoods()">{{ $t("DeselectAllItems") }}</span>
         </div>
         <div ref="listContent" class="list-content"><!--ref="listContent"是把dom传递给后面dom实现-->
           <ul>
@@ -236,7 +236,7 @@
       z-index: -1 // 因为需要被购物栏的圆挡住
       width: 100%
       transform: translate3d(0, -100%, 0) // 上移自身高度
-      transition: all 1.5s
+      transition: all 0.5s
       &.shopcartList-enter, &.shopcartList-leave-to // 进入过渡的开始状态,离开过渡的结束状态
         transform: translate3d(0, 0, 0)
       .list-header

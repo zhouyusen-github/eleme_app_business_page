@@ -7,7 +7,7 @@
     </div>
     <div @click="content()" class="switch" :class="{'on':control.onlyContent}"><!--选择是否只看内容的评价-->
       <span class="icon-check_circle"></span><!--打勾按钮-->
-      <span class="text">只看内容的评价</span>
+      <span class="text">{{ $t("ratingselect.HideRatingsOnlyReviews") }}</span>
     </div>
   </div>
 </template>

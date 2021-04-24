@@ -7,7 +7,7 @@ const en = {
     }
   },
   user: {
-    login: 'Sign in',
+    goods: 'ccc',
     register: 'Sign up',
     hasCount: 'Already have an account?',
     noCount: 'New user?',

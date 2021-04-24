@@ -29,15 +29,16 @@ const router = new VueRouter({
 
 // 根据浏览器设置语言
 let lang = navigator.language;
+let langTransform = lang;
 if (lang === 'zh' || lang === 'zh-CN') {
-  localStorage.setItem('lang', 'cn');
+  langTransform = 'cn';
 } else {
-  localStorage.setItem('lang', 'en');
+  langTransform = 'en';
 }
 
 // 启动i18n
 const i18n = new VueI18n({
-  locale: lang, // 设置语言
+  locale: langTransform, // 设置语言
   messages
 });
 

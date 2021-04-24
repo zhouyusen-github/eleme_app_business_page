@@ -1,27 +1,52 @@
 const cn = {
+  App: {
+    goods: '商品',
+    ratings: '评论',
+    seller: '商家'
+  },
+  ratings: {
+    score: '综合评分',
+    rankRate: '高于周边商家',
+    serviceScore: '服务态度',
+    foodScore: '商品评分',
+    deliveryTime: '送达时间'
+  },
+  seller: {
+    monthlySale: '月售',
+    averageDeliveryTime: '平均配送时间',
+    announcementsAndEvents: '公告与活动',
+    restaurantPicture: '餐厅图片',
+    restaurantInformation: '餐厅信息',
+    saved: '已收藏',
+    unsaved: '未收藏'
+  },
+  deliveryFee: '配送费',
+  minimumConsumption: '起送价',
+  food: {
+    monthlySale: '月售',
+    foodInformation: '菜品消息',
+    foodReviews: '菜品评价',
+    foodRating: '好评率',
+    addToCart: '加入购物车'
+  },
+  ratingselect: {
+    HideRatingsOnlyReviews: '隐藏只评分的评价'
+  },
   header: {
-    logo: '标志',
-    router: {
-      index: '首页',
-      about: '关于'
-    }
+    discountInformation: '优惠信息',
+    restaurantAnnouncement: '餐厅公告'
   },
-  user: {
-    login: '登录',
-    register: '注册',
-    hasCount: '已有账号?',
-    noCount: '没有账号?',
-    logOut: '退出登录',
-    logSucc: '登录成功',
-    place: {
-      userName: '请输入用户名',
-      passWord: '请输入密码',
-      passWordAgain: '请再次输入密码',
-      passNotMatch: '两次输入密码不一致'
-    }
+  shopCart: '购物车',
+  DeselectAllItems: '清空',
+  Unit: {
+    minute: '分钟',
+    ge: '个',
+    fen: '份'
   },
-  code: {
-    error: '错误'
+  dollar: '元',
+  moneyNotation: '￥',
+  Common: {
+    NoCommentsYet: '暂无评价'
   }
 };
 export default cn;
