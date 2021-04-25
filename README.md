@@ -7,6 +7,7 @@
 [http://35.80.203.102/eleme](http://35.80.203.102/eleme)
 
 It's better to open on the phone
+Support Chinese and English interface (Depend on browser language)
 
 ## 介绍
 
@@ -17,6 +18,7 @@ It's better to open on the phone
 [http://35.80.203.102/eleme](http://35.80.203.102/eleme)
 
 手机上看效果更好
+支持中文和英文界面(根据浏览器语言判定)
 
 
 ## Build Setup
