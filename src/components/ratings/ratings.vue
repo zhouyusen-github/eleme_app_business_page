@@ -85,7 +85,7 @@
       };
     },
     created() {
-      this.$http.get('/api/' + this.$i18n.t('language') + '/ratings').then(response => { // 和App.vue一样访问接口获取数据  /api/ratings 是在webpack.dev.conf.js定义的
+      this.$http.get('/static/' + this.$i18n.t('language') + '/ratings.json').then(response => { // 和App.vue一样访问接口获取数据  /api/ratings 是在webpack.dev.conf.js定义的
         response = response.body;
         console.log(response);
         if (response.errno === ERR_OK) {
