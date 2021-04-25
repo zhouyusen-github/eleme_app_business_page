@@ -1,12 +1,23 @@
-# eleme
+## introduction
 
 > eleme app business page
+>
+## Demo address
+
+[http://35.80.203.102/eleme](http://35.80.203.102/eleme)
+
+It's better to open on the phone
+
+## 介绍
+
+> 饿了么项目商家页
 >
 ## 演示地址
 
 [http://35.80.203.102/eleme](http://35.80.203.102/eleme)
-手机上打开效果更好
-It's better to open on the phone
+
+手机上看效果更好
+
 
 ## Build Setup
 
