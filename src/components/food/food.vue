@@ -12,7 +12,7 @@
           <h1 class="title">{{food.name}}</h1>
           <div class="detail">
             <span class="sell-count">{{ $t("food.monthlySale") }}{{food.sellCount}}{{ $t("Unit.fen") }}</span>
-            <span class="rating">{{ $t("food.foodRating") }}{{food.rating}}%</span>
+            <span class="rating">{{ $t("food.favorableRate") }}{{food.rating}}%</span>
           </div>
           <div class="price">
             <span class="now_price">{{ $t("moneyNotation") }}{{food.price}}</span><span class="old_price" v-show="food.oldPrice">{{ $t("Unit.moneyNotation") }}{{food.oldPrice}}</span><!--原价这个属性不一定有-->

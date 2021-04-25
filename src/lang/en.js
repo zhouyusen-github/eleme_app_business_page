@@ -1,27 +1,58 @@
-const en = {
+const cn = {
+  App: {
+    goods: 'Goods',
+    ratings: 'Ratings',
+    seller: 'Seller'
+  },
+  ratings: {
+    score: 'score',
+    rankRate: 'Rank: ',
+    serviceScore: 'service score',
+    foodScore: 'food score',
+    deliveryTime: 'delivery time '
+  },
+  seller: {
+    monthlySale: 'monthly sale ',
+    averageDeliveryTime: 'average delivery time ',
+    announcementsAndEvents: 'Announcements And Events ',
+    restaurantPhoto: 'Restaurant Photo',
+    restaurantInformation: 'Restaurant Information',
+    saved: 'saved',
+    unsaved: 'unsaved'
+  },
+  deliveryFee: 'delivery fee ',
+  minimumConsumption: 'minimum order value',
+  food: {
+    monthlySale: 'monthly sale ',
+    foodInformation: 'food information',
+    foodReviews: 'food reviews',
+    favorableRate: 'favorable rate',
+    addToCart: 'add to cart'
+  },
+  ratingselect: {
+    HideRatingsOnlyReviews: 'hide ratings-only reviews'
+  },
   header: {
-    logo: 'Logo',
-    router: {
-      index: 'Index',
-      about: 'About'
-    }
+    discountInformation: 'Discount',
+    restaurantAnnouncement: 'Announcement'
   },
-  user: {
-    goods: 'ccc',
-    register: 'Sign up',
-    hasCount: 'Already have an account?',
-    noCount: 'New user?',
-    logOut: 'Sign out',
-    logSucc: 'Sign in Success',
-    place: {
-      userName: 'Please enter a user name',
-      passWord: 'Please enter your password',
-      passWordAgain: 'Please enter your password again',
-      passNotMatch: 'The two passwords do not match'
-    }
+  shopCart: 'shopcart',
+  DeselectAllItems: 'deselect all items',
+  Unit: {
+    minute: 'm',
+    ge: '',
+    fen: ''
   },
-  code: {
-    error: 'error'
+  yuan: '',
+  moneyNotation: '$',
+  checkout: 'checkout',
+  shopMore: 'shop more',
+  forDelivery: 'for delivery',
+  all: 'all',
+  positive: 'positive',
+  negative: 'negative',
+  Common: {
+    NoCommentsYet: 'no comments yet'
   }
 };
-export default en;
+export default cn;

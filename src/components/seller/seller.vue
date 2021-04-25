@@ -52,7 +52,7 @@
       </div>
       <split></split>
       <div class="shopPicture">
-        <h1 class="title">{{ $t("seller.restaurantPicture") }}</h1>
+        <h1 class="title">{{ $t("seller.restaurantPhoto") }}</h1>
         <div class="pictures-wrapper" ref="picturesWrapper">
           <ul class="picture-list" ref="pictureList">
             <li v-for="picture in seller.pics" class="picture">

@@ -8,7 +8,7 @@
           </div>
           <div class="num" v-show="totalCount>0">{{totalCount}}</div><!--没购买商品不显示-->
         </div>
-        <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
+        <div class="price" :class="{'highlight':totalPrice>0}">{{ $t("moneyNotation") }}{{totalPrice}}</div>
         <div class="description">{{ $t("deliveryFee") }}{{ $t("moneyNotation") }}{{deliveryPrice}}{{ $t("yuan") }}</div>
       </div>
       <div class="content-right">

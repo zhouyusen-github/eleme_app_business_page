@@ -5,6 +5,8 @@
 ## 演示地址
 
 [http://35.80.203.102/eleme](http://35.80.203.102/eleme)
+手机上打开效果更好
+It's better to open on the phone
 
 ## Build Setup
 

@@ -15,7 +15,7 @@ const cn = {
     monthlySale: '月售',
     averageDeliveryTime: '平均配送时间',
     announcementsAndEvents: '公告与活动',
-    restaurantPicture: '餐厅图片',
+    restaurantPhoto: '餐厅图片',
     restaurantInformation: '餐厅信息',
     saved: '已收藏',
     unsaved: '未收藏'
@@ -26,7 +26,7 @@ const cn = {
     monthlySale: '月售',
     foodInformation: '菜品消息',
     foodReviews: '菜品评价',
-    foodRating: '好评率',
+    favorableRate: '好评率',
     addToCart: '加入购物车'
   },
   ratingselect: {
