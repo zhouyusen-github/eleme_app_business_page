@@ -78,9 +78,9 @@
           onlyContent: false
         },
         desc: {
-          all: '全部',
-          positive: '满意',
-          negative: '不满意'
+          all: this.$i18n.t('all'),
+          positive: this.$i18n.t('positive'),
+          negative: this.$i18n.t('negative')
         }
       };
     },

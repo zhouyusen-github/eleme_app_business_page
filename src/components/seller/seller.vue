@@ -13,14 +13,14 @@
             <h2>{{ $t("minimumConsumption") }}</h2>
             <div class="content">
               <span class="stress">{{seller.minPrice}}</span>
-              {{ $t("dollar") }}
+              {{ $t("yuan") }}
             </div>
           </li>
           <li class="block">
             <h2>{{ $t("deliveryFee") }}</h2>
             <div class="content">
               <span class="stress">{{seller.deliveryPrice}}</span>
-              {{ $t("dollar") }}
+              {{ $t("yuan") }}
             </div>
           </li>
           <li class="block">

@@ -9,7 +9,7 @@
           <div class="num" v-show="totalCount>0">{{totalCount}}</div><!--没购买商品不显示-->
         </div>
         <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
-        <div class="description">{{ $t("deliveryFee") }}{{ $t("moneyNotation") }}{{deliveryPrice}}{{ $t("dollar") }}</div>
+        <div class="description">{{ $t("deliveryFee") }}{{ $t("moneyNotation") }}{{deliveryPrice}}{{ $t("yuan") }}</div>
       </div>
       <div class="content-right">
         <div class="pay" :class="payClass">
@@ -87,12 +87,12 @@
       },
       payDescription () {
         if (this.totalPrice === 0) {
-          return `￥${this.minPrice}元起送`; // ES6特性``内$后动态内容会填在$位置，比''要字符串拼接方便
+          return this.$i18n.t('minimumConsumption') + this.$i18n.t('moneyNotation') + `${this.minPrice}`; // ES6特性``内$后动态内容会填在$位置，比''要字符串拼接方便
         } else if (this.totalPrice < this.minPrice) {
           let difference = this.minPrice - this.totalPrice;
-          return `还差￥${difference}元起送`;
+          return this.$i18n.t('shopMore') + this.$i18n.t('moneyNotation') + `${difference}` + this.$i18n.t('yuan') + this.$i18n.t('forDelivery');
         } else {
-          return '去结算';
+          return this.$i18n.t('checkout');
         }
       },
       payClass() {

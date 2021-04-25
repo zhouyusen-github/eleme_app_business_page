@@ -43,8 +43,14 @@ const cn = {
     ge: '个',
     fen: '份'
   },
-  dollar: '元',
+  yuan: '元',
   moneyNotation: '￥',
+  checkout: '去结算',
+  shopMore: '还差',
+  forDelivery: '配送',
+  all: '全部',
+  positive: '推荐',
+  negative: '吐槽',
   Common: {
     NoCommentsYet: '暂无评价'
   }

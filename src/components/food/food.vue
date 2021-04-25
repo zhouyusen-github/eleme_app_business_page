@@ -79,9 +79,9 @@
          onlyContent: false
        },
        desc: {
-         all: '全部',
-         positive: '推荐',
-         negative: '吐槽'
+         all: this.$i18n.t('all'),
+         positive: this.$i18n.t('positive'),
+         negative: this.$i18n.t('negative')
        }
      };
    },
