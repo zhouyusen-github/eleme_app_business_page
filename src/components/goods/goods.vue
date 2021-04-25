@@ -88,7 +88,7 @@
       }
     },
     created() { // 访问goods数据接口获取goods数据(同App.vue中访问seller接口获取数据的格式，不在App.vue就获取该数据的原因是，需要数据时再访问相关接口)
-      this.$http.get('/static/goods.json').then(response => {
+      this.$http.get('/api/' + this.$i18n.t('language') + '/goods').then(response => { // /api/goods 是在webpack.dev.conf.js定义的
         // get data
         response = response.body;
         if (response.errno === ERR_OK) {

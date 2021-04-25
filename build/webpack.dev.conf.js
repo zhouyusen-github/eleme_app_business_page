@@ -14,11 +14,16 @@ const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 //添加路由，代码部分，下面还有
-const appData = require('../data.json');
-const seller = appData.seller;
-const goods = appData.goods;
-const ratings = appData.ratings;
-//
+const appDataCn = require('../data_Chinese.json');
+const sellerCn = appDataCn.seller;
+const goodsCn = appDataCn.goods;
+const ratingsCn = appDataCn.ratings;
+//英文路由
+const appDataEn = require('../data_English.json');
+const sellerEn = appDataEn.seller;
+const goodsEn = appDataEn.goods;
+const ratingsEn = appDataEn.ratings;
+
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -51,23 +56,42 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     },
     before:function(app) {
-      app.get('/api/seller', (req, res) => {
+      app.get('/api/cn/seller', (req, res) => {
         res.json({
           // 访问http://localhost:8080/seller就会返回该json内容，上面这个路径可根据需要随便改
           errno: 0, //错误码，以后根据业务修改
-          data: seller
+          data: sellerCn
         })
       }),
-        app.get('/api/goods', (req, res) => {
+      app.get('/api/cn/goods', (req, res) => {
+        res.json({
+          errno: 0,
+          data: goodsCn
+        })
+      }),
+      app.get('/api/cn/ratings', (req, res) => {
+        res.json({
+          errno: 0,
+          data: ratingsCn
+        })
+      })
+      app.get('/api/en/seller', (req, res) => {
+        res.json({
+          // 访问http://localhost:8080/seller就会返回该json内容，上面这个路径可根据需要随便改
+          errno: 0, //错误码，以后根据业务修改
+          data: sellerEn
+        })
+      }),
+        app.get('/api/en/goods', (req, res) => {
           res.json({
             errno: 0,
-            data: goods
+            data: goodsEn
           })
         }),
-        app.get('/api/ratings', (req, res) => {
+        app.get('/api/en/ratings', (req, res) => {
           res.json({
             errno: 0,
-            data: ratings
+            data: ratingsEn
           })
         })
     }

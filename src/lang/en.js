@@ -1,4 +1,5 @@
-const cn = {
+const en = {
+  language: 'en',
   App: {
     goods: 'Goods',
     ratings: 'Ratings',
@@ -21,12 +22,12 @@ const cn = {
     unsaved: 'unsaved'
   },
   deliveryFee: 'delivery fee ',
-  minimumConsumption: 'minimum order value',
+  minimumConsumption: 'min order ',
   food: {
     monthlySale: 'monthly sale ',
     foodInformation: 'food information',
     foodReviews: 'food reviews',
-    favorableRate: 'favorable rate',
+    favorableRate: 'favorable rate ',
     addToCart: 'add to cart'
   },
   ratingselect: {
@@ -46,8 +47,8 @@ const cn = {
   yuan: '',
   moneyNotation: '$',
   checkout: 'checkout',
-  shopMore: 'shop more',
-  forDelivery: 'for delivery',
+  shopMore: 'shop more ',
+  forDelivery: '',
   all: 'all',
   positive: 'positive',
   negative: 'negative',
@@ -55,4 +56,4 @@ const cn = {
     NoCommentsYet: 'no comments yet'
   }
 };
-export default cn;
+export default en;

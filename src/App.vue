@@ -44,7 +44,7 @@
     // 生命周期函数create
     created() {
       // vue-resource
-      this.$http.get('/static/seller.json?id=' + this.seller.id).then(response => { // 访问后台api接口返回数据（这里是访问了模拟数据）
+      this.$http.get('/api/' + this.$i18n.t('language') + '/seller?id=' + this.seller.id).then(response => { // 访问后台api接口返回数据（这里是访问了模拟数据）  /api/seller 是在webpack.dev.conf.js定义的
         // get data
         response = response.body; // 查github上vue-resource介绍的api,接口随版本会变动
         console.log(response);

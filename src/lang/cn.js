@@ -1,4 +1,5 @@
 const cn = {
+  language: 'cn',
   App: {
     goods: '商品',
     ratings: '评论',
